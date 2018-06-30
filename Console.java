@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.Scanner;
 
+import operadora.Operadora;
+
 public class Console {
 
 /************************* Criar Comandos aqui dentro *************************/
@@ -66,7 +68,6 @@ public class Console {
         } else if (input.equals("transferencia")) {
             transferencia();
         } else if (input.equals("sair")) {
-            salvar();
             status = false;
         } else {
             System.out.println("ERRO: Comando desconhecido");
@@ -326,7 +327,7 @@ public class Console {
         System.out.println("Andre Lage");
         System.out.println("Augusto Mafra\n");
 
-        restaurar();
+        operadora = new Operadora("pooTelecom");
 
         System.out.println("\nEntre o comando 'ajuda' para obter uma lista dos comandos disponiveis\n");
     }
@@ -339,6 +340,7 @@ public class Console {
         }
     }
 
+    private static Operadora operadora;
     private static Scanner scan;
     private static Path databaseFile;
 }
