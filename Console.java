@@ -129,8 +129,8 @@ public class Console {
     }
 
     private static void excluirConta() {
-        int numConta = promptInt("Numero da conta");
-        /*boolean retorno = banco.removeConta(numConta);
+        /*int numConta = promptInt("Numero da conta");
+        boolean retorno = banco.removeConta(numConta);
         if(retorno){
             System.out.println("Conta removida com sucesso");
         }else{
