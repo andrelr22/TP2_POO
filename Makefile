@@ -21,10 +21,13 @@ BLOCK_WARNINGS = -Werror -Xlint # Treat any compilation warning as error
 
 MAIN = Console.java
 OPERADORA = ./operadora/Operadora.java
+CLIENTE = ./operadora/Cliente.java
 
 all: $(MAIN:.java=.class)
 
 $(MAIN:.java=.class): $(OPERADORA:.java=.class)
+
+$(OPERADORA:.java=.class): $(CLIENTE:.java=.class)
 
 clean:
 	$(RM) ./operadora/*.class
