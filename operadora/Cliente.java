@@ -21,7 +21,18 @@ class Cliente {
         this.cpf_cnpj = cpf_cnpj;
     }
 
+    public Cliente(Cliente outro) {
+        this.nome = outro.nome;
+        this.endereco = outro.endereco;
+        this.cpf_cnpj = outro.cpf_cnpj;
+    }
+
     public boolean equals(Cliente outro) {
         return this.cpf_cnpj == outro.cpf_cnpj;
+    }
+
+    public String getCpfCnpj() {
+        String copia = new String(cpf_cnpj);
+        return copia;
     }
 }

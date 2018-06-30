@@ -15,6 +15,7 @@ import java.util.GregorianCalendar;
 import java.util.Scanner;
 
 import operadora.Operadora;
+import operadora.ClienteInvalidoException;
 
 public class Console {
 
@@ -85,21 +86,19 @@ public class Console {
 
     private static void cadastrarCliente() {
         System.out.println("Insira informacoes para cadastro do cliente:");
-        /*String nome = promptString("Nome");
+        String nome = promptString("Nome");
         String cpf_cnpj = promptString("CPF/CNPJ");
         String endereco = promptString("Endereco");
-        String telefone = promptString("Telefone");
         String confirmacao = promptString("Confirmar cadastro do cliente? [s/n]");
-        if (confirmacao.equals("s")) {
-            boolean status = banco.addCliente(new Cliente(nome, cpf_cnpj, endereco, telefone));
-            if (status) {
-                System.out.println("Cadastro do cliente concluido com sucesso");
-            } else {
-                System.out.println("ERRO: Ja existe cliente cadastrado com o CPF/CNPJ especificado");
-            }
-        } else {
+        if (!confirmacao.equals("s")) {
             System.out.println("Cadastro do cliente foi cancelado pelo usuario");
-        }*/
+            return;
+        }
+        try {
+            operadora.addCliente(nome, endereco, cpf_cnpj);
+        } catch (ClienteInvalidoException excp) {
+            System.out.println(excp.getMessage() + excp.getCpfCnpj());
+        }
     }
 
     private static void criarConta() {

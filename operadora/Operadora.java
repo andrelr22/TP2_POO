@@ -26,22 +26,12 @@ public class Operadora {
                            String endereco,
                            String cpf_cnpj) throws ClienteInvalidoException {
         Cliente novoCliente = new Cliente(nome, endereco, cpf_cnpj);
+        // FIXME 'contains' nao funciona nesse caso. Devemos fazer um for no
+        // Vector mesmo
         if (clientes.contains(novoCliente)) {
-            throw new ClienteInvalidoException("ERRO Ja existe cliente cadastrado com o CPF/CNPJ",
+            throw new ClienteInvalidoException("ERRO Ja existe cliente cadastrado com o CPF/CNPJ: ",
                                                novoCliente);
         }
         clientes.add(novoCliente);
-    }
-}
-
-class ClienteInvalidoException extends Exception {
-    // Isso deve ser somente algum identificador unico para a classe.
-    // A escolha do 0XAA0 e' arbitraria
-    private static final long serialVersionUID = 0xAA0;
-    private Cliente cliente;
-
-    public ClienteInvalidoException(String mensagemDeErro, Cliente cliente) {
-        super(mensagemDeErro);
-        this.cliente = cliente;
     }
 }
