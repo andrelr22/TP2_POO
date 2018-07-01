@@ -32,4 +32,8 @@ public class Plano {
         String copia = new String(nome);
         return copia;
     }
+
+    public double cobrar(double duracao) {
+        return valorPorMinuto * duracao;
+    }
 }

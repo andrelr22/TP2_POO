@@ -42,7 +42,24 @@ public abstract class Celular {
     }
 
     public void registrarLigacao(GregorianCalendar dataHora, double duracao) {
-        ligacoes.add(new Ligacao(dataHora, duracao));
+        ligacoes.add(new Ligacao(dataHora, duracao, plano.cobrar(duracao)));
+    }
+
+    public List<Ligacao> getLigacoes(GregorianCalendar dataInicial) {
+        List<Ligacao> extrato = new Vector<Ligacao>();
+        GregorianCalendar hoje = new GregorianCalendar();
+        for (Ligacao l : ligacoes) {
+            GregorianCalendar dataHora = l.getDataHora();
+            // FIXME Ainda pode haver algum bug relativo a comparacao dos
+            // minutos
+            if ((dataHora.after(dataInicial) ||
+                 dataHora.equals(dataInicial)) &&
+                (dataHora.before(hoje) ||
+                 dataHora.equals(hoje))) {
+                extrato.add(l);
+            }
+        }
+        return extrato;
     }
 
     public abstract boolean isPosPago();

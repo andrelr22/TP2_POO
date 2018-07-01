@@ -33,39 +33,39 @@ public class Operadora {
                            String endereco,
                            String cpf_cnpj) throws ClienteInvalidoException {
         Cliente novoCliente = new Cliente(nome, endereco, cpf_cnpj);
-        if (clienteJaExiste(novoCliente)) {
+        if (getCliente(cpf_cnpj) != null) {
             throw new ClienteInvalidoException("ERRO Ja existe cliente cadastrado com o CPF/CNPJ: ",
                                                novoCliente);
         }
         clientes.add(novoCliente);
     }
 
-    private boolean clienteJaExiste(Cliente cliente) {
+    private Cliente getCliente(String cpfCnpj) {
         for (Cliente c : clientes) {
-            if (c.equals(cliente)) {
-                return true;
+            if (c.getCpfCnpj().equals(cpfCnpj)) {
+                return c;
             }
         }
-        return false;
+        return null;
     }
 
     public void addPlano(String nome,
                          double valorPorMinuto) throws PlanoInvalidoException {
         Plano novoPlano = new Plano(nome, valorPorMinuto);
-        if (planoJaExiste(novoPlano)) {
+        if (getPlano(nome) != null) {
             throw new PlanoInvalidoException("ERRO Ja existe plano cadastrado com o nome: ",
                                              novoPlano);
         }
         planos.add(novoPlano);
     }
 
-    private boolean planoJaExiste(Plano plano) {
+    private Plano getPlano(String nome) {
         for (Plano p : planos) {
-            if (p.equals(plano)) {
-                return true;
+            if (p.getNome().equals(nome)) {
+                return p;
             }
         }
-        return false;
+        return null;
     }
 
     public String addCelular(boolean prePago,
@@ -76,15 +76,15 @@ public class Operadora {
         if (dataFatura == null) {
             dataFatura = new GregorianCalendar(); // hoje
         }
-        Cliente cliente = new Cliente("", "", cpf_cnpj);
-        if (!clienteJaExiste(cliente)) {
+        Cliente cliente = getCliente(cpf_cnpj);
+        if (cliente == null) {
             throw new ClienteInvalidoException("ERRO Nao existe cliente cadastrado com o CPF/CNPJ: ",
-                                               cliente);
+                                               new Cliente("", "", cpf_cnpj));
         }
-        Plano plano = new Plano(nomeDoPlano, 0);
-        if (!planoJaExiste(plano)) {
+        Plano plano = getPlano(nomeDoPlano);
+        if (plano == null) {
             throw new PlanoInvalidoException("ERRO Nao existe plano cadastrado com o nome: ",
-                                             plano);
+                                             new Plano(nomeDoPlano, 0));
         }
         Celular novoCelular;
         if (prePago) {
@@ -109,6 +109,9 @@ public class Operadora {
     public void registrarLigacao(String numeroDoCelular,
                                  GregorianCalendar dataHora,
                                  double duracao) throws CelularInvalidoException {
+        if (dataHora == null) {
+            dataHora = new GregorianCalendar(); // hoje
+        }
         Celular celular = getCelular(numeroDoCelular);
         if (celular == null) {
             throw new CelularInvalidoException("ERRO Nao existe celular com o numero: ", numeroDoCelular);
@@ -116,6 +119,7 @@ public class Operadora {
         celular.registrarLigacao(dataHora, duracao);
     }
 
+<<<<<<< HEAD
     public int removeCelular(String numeroDoCelular){
         int contador=0;
         for(Celular c : celulares){
@@ -163,5 +167,17 @@ public class Operadora {
         }
     }
         return-2;
+=======
+    public List<Ligacao> getExtrato(String numeroDoCelular,
+                                    GregorianCalendar dataInicial) throws CelularInvalidoException {
+        if (dataInicial == null) {
+            dataInicial = new GregorianCalendar(); // hoje
+        }
+        Celular celular = getCelular(numeroDoCelular);
+        if (celular == null) {
+            throw new CelularInvalidoException("ERRO Nao existe celular com o numero: ", numeroDoCelular);
+        }
+        return celular.getLigacoes(dataInicial);
+>>>>>>> 6e4193309f2cda7ce9a4cdf27ad5465f0d5c7428
     }
 }
