@@ -97,19 +97,22 @@ public class Console {
     }
 
     private static void criarCelular() {
-        // TODO Implementar tipos de celular e data da fatura
         System.out.println("Insira informacoes para criacao do celular:");
         String tipo = promptString("Tipo: cartao [c] ou assinatura [a]");
+        boolean prePago = tipo.equals("c") ? true : false;
         String cpf_cnpj = promptString("CPF/CNPJ do cliente");
         String plano = promptString("Plano");
-        GregorianCalendar dataFatura = promptCalendar("Data de vencimento da fatura (dd/mm/aaaa ou default = hoje)");
+        GregorianCalendar dataFatura = null;
+        if (!prePago) {
+            dataFatura = promptCalendar("Data de vencimento da fatura (dd/mm/aaaa ou default = hoje)");
+        }
         String confirmacao = promptString("Confirmar criacao do celular? [s/n]");
         if (!confirmacao.equals("s")) {
             System.out.println("Criacao do celular foi cancelada pelo usuario");
             return;
         }
         try {
-            operadora.addCelular(cpf_cnpj, plano);
+            operadora.addCelular(prePago, cpf_cnpj, plano, dataFatura);
         } catch (ClienteInvalidoException excp) {
             System.out.println(excp.getMessage() + excp.getCpfCnpj());
             return;

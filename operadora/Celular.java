@@ -10,7 +10,7 @@
 
 package operadora;
 
-public class Celular {
+public abstract class Celular {
     static private int proximoNumero = 0;
 
     private String numero;

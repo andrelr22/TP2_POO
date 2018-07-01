@@ -10,6 +10,7 @@
 
 package operadora;
 
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Vector;
 
@@ -67,10 +68,14 @@ public class Operadora {
         return false;
     }
 
-    // TODO Implementar tipos de celular e data da fatura
-    public void addCelular(String cpf_cnpj,
-                           String nomeDoPlano) throws ClienteInvalidoException,
-                                                      PlanoInvalidoException {
+    public void addCelular(boolean prePago,
+                           String cpf_cnpj,
+                           String nomeDoPlano,
+                           GregorianCalendar dataFatura) throws ClienteInvalidoException,
+                                                                PlanoInvalidoException {
+        if (dataFatura == null) {
+            dataFatura = new GregorianCalendar(); // hoje
+        }
         Cliente cliente = new Cliente("", "", cpf_cnpj);
         if (!clienteJaExiste(cliente)) {
             throw new ClienteInvalidoException("ERRO Nao existe cliente cadastrado com o CPF/CNPJ: ",
@@ -81,6 +86,10 @@ public class Operadora {
             throw new PlanoInvalidoException("ERRO Nao existe plano cadastrado com o nome: ",
                                              plano);
         }
-        celulares.add(new Celular());
+        if (prePago) {
+            celulares.add(new CelularPrePago());
+        } else {
+            celulares.add(new CelularPosPago(dataFatura));
+        }
     }
 }
