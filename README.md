@@ -22,4 +22,10 @@ Augusto Mafra
     ```
     $ java Console
     ```
+3. O programa pode ser executado com um cenario de teste previamente carregado
+   utilizando o argumento de linha de comando `-teste`:
+
+    ```
+    $ java Console -teste
+    ```
 
