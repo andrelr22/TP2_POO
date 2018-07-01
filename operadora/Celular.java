@@ -34,7 +34,7 @@ public abstract class Celular {
     }
 
     public void registrarLigacao(GregorianCalendar dataHora, double duracao) {
-        ligacoes.add(new Ligacao(dataHora, duracao));
+        ligacoes.add(new Ligacao(dataHora, duracao, plano.cobrar(duracao)));
     }
 
     public List<Ligacao> getLigacoes(GregorianCalendar dataInicial) {
