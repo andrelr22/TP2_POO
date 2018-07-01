@@ -19,11 +19,13 @@ public class Operadora {
     private String nome;
     private List<Cliente> clientes;
     private List<Plano> planos;
+    private List<Celular> celulares;
 
     public Operadora(String nome) {
         this.nome = nome;
         this.clientes = new Vector<Cliente>();
         this.planos = new Vector<Plano>();
+        this.celulares = new Vector<Celular>();
     }
 
     public void addCliente(String nome,

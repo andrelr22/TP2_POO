@@ -23,11 +23,9 @@ MAIN = Console.java
 
 OPERADORA = ./operadora/Operadora.java
 
-EXCECOES = ./excecoes/ClienteInvalidoException.java \
-		   ./execoes/PlanoInvalidoException.java
+EXCECOES = ./excecoes/*.java
 
-OPERADORA_ITEMS = ./operadora/Cliente.java \
-				  ./operadora/Plano.java
+OPERADORA_ITEMS = ./operadora/[!O]*.java # everything inside ./operadora/ except 'Operadora.java'
 
 all: $(MAIN:.java=.class)
 
