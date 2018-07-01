@@ -119,7 +119,6 @@ public class Operadora {
         celular.registrarLigacao(dataHora, duracao);
     }
 
-<<<<<<< HEAD
     public int removeCelular(String numeroDoCelular){
         int contador=0;
         for(Celular c : celulares){
@@ -139,14 +138,14 @@ public class Operadora {
                         }
                         else{
                             System.out.println("operacao fracassou");
-                           return -1; 
-                        } 
+                           return -1;
+                        }
                     }
                     contador2=contador2 + 1;
                 }
                 System.out.println("nao achou o cliente com o cpf");
                 return -1;
-            } 
+            }
             System.out.println("antes contador");
             contador=contador+1;
         }
@@ -154,20 +153,19 @@ public class Operadora {
     }
 
     public int adicionaCreditos(String numeroCelular, int valor){
-        Celular C;
-        if(C==null){
+        Celular C = getCelular(numeroCelular);
+        if (C == null) {
             return -2;
         }
-        if(C.isPosPago()==false){
+        if (C.isPosPago() == false) {
             ((CelularPrePago) C).addSaldo(valor);
             return 1;
-        }else{
+        } else {
             return -1;
         }
-        }
+        //return-2;
     }
-        return-2;
-=======
+
     public List<Ligacao> getExtrato(String numeroDoCelular,
                                     GregorianCalendar dataInicial) throws CelularInvalidoException {
         if (dataInicial == null) {
@@ -181,6 +179,5 @@ public class Operadora {
         dataInicial.set(GregorianCalendar.MINUTE, 0);
         dataInicial.set(GregorianCalendar.SECOND, 0);
         return celular.getLigacoes(dataInicial);
->>>>>>> 6e4193309f2cda7ce9a4cdf27ad5465f0d5c7428
     }
 }

@@ -10,6 +10,7 @@
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Scanner;
@@ -371,24 +372,32 @@ public class Console {
     }
 
     private static void setupTeste() {
-        hoje = new GregorianCalendar();
-        System.out.println("-teste: Iniciando setup de teste");
-        operadora.addCliente("ze", "rua do ze", "123");
-        operadora.addCliente("jao", "rua do jao", "456");
-        operadora.addPlano("basico", 1000);
-        operadora.addPlano("premium", 2000);
-        operadora.addCelular(true, "123", "basico", hoje);
-        operadora.addCelular(false, "123", "premium", hoje);
-        operadora.addCelular(true, "456", "basico", hoje);
-        operadora.registrarLigacao("000000000", hoje, 5);
-        operadora.registrarLigacao("000000000", hoje, 6);
-        operadora.registrarLigacao("000000001", hoje, 7);
-        operadora.registrarLigacao("000000002", hoje, 8);
+        GregorianCalendar hoje = new GregorianCalendar();
+        System.out.println("-teste: Iniciando setup de teste\n");
+        try {
+            operadora.addCliente("ze", "rua do ze", "123");
+            operadora.addCliente("jao", "rua do jao", "456");
+            operadora.addPlano("basico", 1000);
+            operadora.addPlano("premium", 2000);
+            operadora.addCelular(true, "123", "basico", hoje);
+            operadora.addCelular(false, "123", "premium", hoje);
+            operadora.addCelular(true, "456", "basico", hoje);
+            operadora.registrarLigacao("000000000", hoje, 5);
+            operadora.registrarLigacao("000000000", hoje, 6);
+            operadora.registrarLigacao("000000001", hoje, 7);
+            operadora.registrarLigacao("000000002", hoje, 8);
+        } catch (ClienteInvalidoException excp) {
+            System.out.println(excp.getMessage() + excp.getCpfCnpj());
+        } catch (PlanoInvalidoException excp) {
+            System.out.println(excp.getMessage() + excp.getNome());
+        } catch (CelularInvalidoException excp) {
+            System.out.println(excp.getMessage() + excp.getNumeroDoCelular());
+        }
     }
 
     public static void main(String[] args) {
         iniciarLinhaDeComando();
-        if (args.contains("-teste")) {
+        if (Arrays.asList(args).contains("-teste")) {
             setupTeste();
         }
         boolean status = true;
