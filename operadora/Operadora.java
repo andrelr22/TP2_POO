@@ -108,10 +108,25 @@ public class Operadora {
     public void registrarLigacao(String numeroDoCelular,
                                  GregorianCalendar dataHora,
                                  double duracao) throws CelularInvalidoException {
+        if (dataHora == null) {
+            dataHora = new GregorianCalendar(); // hoje
+        }
         Celular celular = getCelular(numeroDoCelular);
         if (celular == null) {
             throw new CelularInvalidoException("ERRO Nao existe celular com o numero: ", numeroDoCelular);
         }
         celular.registrarLigacao(dataHora, duracao);
+    }
+
+    public List<Ligacao> getExtrato(String numeroDoCelular,
+                                    GregorianCalendar dataInicial) throws CelularInvalidoException {
+        if (dataInicial == null) {
+            dataInicial = new GregorianCalendar(); // hoje
+        }
+        Celular celular = getCelular(numeroDoCelular);
+        if (celular == null) {
+            throw new CelularInvalidoException("ERRO Nao existe celular com o numero: ", numeroDoCelular);
+        }
+        return celular.getLigacoes(dataInicial);
     }
 }

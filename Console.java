@@ -10,13 +10,14 @@
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.GregorianCalendar;
+import java.util.List;
 import java.util.Scanner;
 
 import excecoes.*;
 
 import operadora.Operadora;
+import operadora.Ligacao;
 
 public class Console {
 
@@ -25,6 +26,7 @@ public class Console {
                                 "cadastrar",
                                 "criar_celular",
                                 "criar_plano",
+                                "extrato",
                                 "telefonar",
                                 "sair"};
 
@@ -240,22 +242,16 @@ public class Console {
 
     private static void extrato() {
         System.out.println("Insira informacoes para o extrato:");
-        /*int numConta = promptInt("Numero da conta");
-        GregorianCalendar dataInicial = promptCalendar("Data inicial (dd/mm/aaaa ou default = inicio do mes atual)");
-        GregorianCalendar dataFinal = promptCalendar("Data final (dd/mm/aaaa ou default = hoje)");
-        ArrayList<banco.Movimentacao> extrato = new ArrayList<banco.Movimentacao>();
-        if (dataInicial == null) {
-            extrato = banco.extrato(numConta);
-        } else if (dataFinal == null) {
-            extrato = banco.extrato(numConta, dataInicial);
-        } else {
-            extrato = banco.extrato(numConta, dataInicial, dataFinal);
+        String numeroDoCelular = promptString("Numero do celular");
+        GregorianCalendar dataInicial = promptCalendar("Data da inicial(dd/mm/aaaa ou default = hoje)");
+        List<Ligacao> ligacoes;
+        try {
+            ligacoes = operadora.getExtrato(numeroDoCelular, dataInicial);
+        } catch (CelularInvalidoException excp) {
+            System.out.println(excp.getMessage() + excp.getNumeroDoCelular());
+            return;
         }
-        if (extrato == null) {
-            System.out.println("ERRO: Nenhuma conta com numero " + numConta + " encontrada");
-        } else {
-            System.out.println(extrato);
-        }*/
+        System.out.println(ligacoes);
     }
 
     private static void listarClientes() {

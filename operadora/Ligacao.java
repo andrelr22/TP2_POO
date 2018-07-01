@@ -20,4 +20,19 @@ public class Ligacao {
         this.dataHora = dataHora;
         this.duracao = duracao;
     }
+
+    public GregorianCalendar getDataHora() {
+        return dataHora;
+    }
+
+    public String toString() {
+        String result = new String();
+        result += "\t" + dataHora.get(GregorianCalendar.DAY_OF_MONTH);
+        result += "/" + (dataHora.get(GregorianCalendar.MONTH) + 1);
+        result += "/" + dataHora.get(GregorianCalendar.YEAR);
+        result += "\t" + duracao;
+        // TODO Valor cobrado na ligacao
+        result += "\n";
+        return result;
+    }
 }
