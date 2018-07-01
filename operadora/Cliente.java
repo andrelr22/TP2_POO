@@ -44,4 +44,18 @@ public class Cliente {
     public void addCelular(Celular celular) {
         celulares.add(celular);
     }
+
+    public boolean removeCelular(String numeroCelular){
+        int contador=0; 
+        System.out.println("entrou na funcao do cliente");
+        for (Celular c: celulares){
+            System.out.println("numerocelular  " + numeroCelular + "  getnumero  " + c.getNumero());
+            if(numeroCelular.equals(c.getNumero())){
+                celulares.remove(contador);
+                return true;
+            }
+            contador = contador +1;
+        }
+        return false;
+    }
 }

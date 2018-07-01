@@ -25,7 +25,9 @@ public class Console {
                                 "cadastrar",
                                 "criar_celular",
                                 "criar_plano",
+                                "excluir_celular",
                                 "telefonar",
+                                "add_creditos",
                                 "sair"};
 
     private static boolean executarLinhaDeComando() {
@@ -40,14 +42,16 @@ public class Console {
             criarCelular();
         } else if (input.equals("criar_plano")) {
             criarPlano();
+        } else if (input.equals("add_creditos")){
+        	adicionaCreditos(); 
         } else if (input.equals("cobrar_tarifa")) {
             cobrarTarifa();
         } else if (input.equals("cobrar_cpmf")) {
             cobrarCPMF();
         } else if (input.equals("deposito")) {
             deposito();
-        } else if (input.equals("excluir_cliente")) {
-            excluirCliente();
+        } else if (input.equals("excluir_celular")) {
+            excluirCelular();
         } else if (input.equals("excluir_conta")) {
             excluirConta();
         } else if (input.equals("extrato")) {
@@ -112,8 +116,9 @@ public class Console {
             System.out.println("Criacao do celular foi cancelada pelo usuario");
             return;
         }
+        String numero;
         try {
-            operadora.addCelular(prePago, cpf_cnpj, plano, dataFatura);
+             numero = operadora.addCelular(prePago, cpf_cnpj, plano, dataFatura);
         } catch (ClienteInvalidoException excp) {
             System.out.println(excp.getMessage() + excp.getCpfCnpj());
             return;
@@ -121,7 +126,7 @@ public class Console {
             System.out.println(excp.getMessage() + excp.getNome());
             return;
         }
-        System.out.println("Celular cadastrado com sucesso");
+        System.out.println("Celular de numero " + numero + " cadastrado com sucesso");
     }
 
     private static void criarPlano() {
@@ -142,17 +147,32 @@ public class Console {
         System.out.println("Plano " + nome + " cadastrado com sucesso");
     }
 
-    private static void excluirCliente() {
-        System.out.println("Insira informacoes do cliente a ser excluido:");
-        /*String cpf_cnpj = promptString("CPF/CNPJ");
-        int retorno =banco.removeCliente(cpf_cnpj);
-        if(retorno==0){
-            System.out.println("Cliente excluido com sucesso");
-        } else if(retorno==-1){
-            System.out.println("ERRO: Cliente não cadastrado no banco");
-        }else if(retorno==-2){
-            System.out.println("ERRO: O cliente não pode ser deletado, pois ainda possui contas cadastradas");
-        }*/
+    private static void excluirCelular() {
+       System.out.println("Insira o numero do celular a ser excluido");
+       String numero = promptString("Numero do Celular");
+       if(operadora.removeCelular(numero)==1){
+       	System.out.println("celular removido com sucesso");
+       }else if (operadora.removeCelular(numero)==-1){
+       	System.out.println("erro interno");
+       } else if (operadora.removeCelular(numero)==-2){
+       	System.out.println("numero de celular não encontrado");
+       }
+       //TODO corrigir o erro e adicionar situações condicionais que impeçam a exclusao 
+
+    }
+
+    private static void adicionaCreditos(){
+    	System.out.println("Insira as informações necessárias para a adiçao de creditos");
+    	String numero = promptString("Numero do Celular");
+    	int creditos = promptInt("Quantidade de creditos a ser adicionados");
+    	int retorno = operadora.adicionaCreditos(numero, creditos);
+    	if (retorno==1){
+    		System.out.println("creditos adicionados com sucesso");
+    	} else if(retorno==-1) {
+    		System.out.println("ERRO: O celular não é do tipo pré pago");
+    	} else if (retorno==-2){
+    		System.out.println("ERRO: Número de celular não encontrado");
+    	}
     }
 
     private static void excluirConta() {
