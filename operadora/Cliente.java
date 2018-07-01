@@ -28,7 +28,7 @@ class Cliente {
     }
 
     public boolean equals(Cliente outro) {
-        return this.cpf_cnpj == outro.cpf_cnpj;
+        return this.cpf_cnpj.equals(outro.cpf_cnpj);
     }
 
     public String getCpfCnpj() {

@@ -98,7 +98,9 @@ public class Console {
             operadora.addCliente(nome, endereco, cpf_cnpj);
         } catch (ClienteInvalidoException excp) {
             System.out.println(excp.getMessage() + excp.getCpfCnpj());
+            return;
         }
+        System.out.println(nome + " cadastrado com sucesso");
     }
 
     private static void criarConta() {
