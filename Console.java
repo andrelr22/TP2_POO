@@ -262,7 +262,15 @@ public class Console {
             System.out.println(excp.getMessage() + excp.getNumeroDoCelular());
             return;
         }
-        System.out.println(info);
+        mostrarInfoDoCelular(info);
+    }
+
+    private static void mostrarInfoDoCelular(List<String> info) {
+        for (int i = 0; i < info.size(); i++) {
+            System.out.print(info.get(i) + ": ");
+            i++;
+            System.out.println(info.get(i));
+        }
     }
 
     private static void extrato() {

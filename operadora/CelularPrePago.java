@@ -11,6 +11,8 @@
 package operadora;
 
 import java.util.GregorianCalendar;
+import java.util.List;
+import java.util.Vector;
 
 public class CelularPrePago extends Celular {
     private double saldo;
@@ -29,5 +31,16 @@ public class CelularPrePago extends Celular {
     public void addSaldo(int valor){
         saldo=saldo+valor;
         dataDeValidadeDoSaldo.add(GregorianCalendar.DAY_OF_MONTH, 180);
+    }
+
+    public List<String> obterInfo() {
+        List<String> info = new Vector<String>();
+        info.add("saldo");
+        info.add("" + saldo);
+        info.add("data de validade");
+        info.add("" + dataDeValidadeDoSaldo.get(GregorianCalendar.DAY_OF_MONTH) + "/" +
+                      (dataDeValidadeDoSaldo.get(GregorianCalendar.MONTH) + 1) + "/" +
+                      dataDeValidadeDoSaldo.get(GregorianCalendar.YEAR));
+        return info;
     }
 }

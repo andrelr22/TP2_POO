@@ -188,14 +188,8 @@ public class Operadora {
         }
         List<String> info = new Vector<String>();
         info.add("tipo");
-        if (celular.isPosPago()) {
-            info.add("pos-pago");
-            info.add("valor da conta");
-            info.add("" + ((CelularPosPago) celular).cobrarMes());
-        } else {
-            info.add("pre-pago");
-            // TODO Acrescentar informacao para celular pre pago
-        }
+        info.add(celular.isPosPago() ? "pos-pago" : "pre-pago");
+        info.addAll(celular.obterInfo());
         return info;
     }
 }

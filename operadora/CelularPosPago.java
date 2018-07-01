@@ -12,6 +12,7 @@ package operadora;
 
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Vector;
 
 public class CelularPosPago extends Celular {
     private GregorianCalendar dataDaFatura;
@@ -25,7 +26,7 @@ public class CelularPosPago extends Celular {
     	return true;
     }
 
-    public double cobrarMes() {
+    public List<String> obterInfo() {
         int diaDaFatura = dataDaFatura.get(GregorianCalendar.DAY_OF_MONTH);
 
         GregorianCalendar mesAnterior = new GregorianCalendar();
@@ -40,6 +41,9 @@ public class CelularPosPago extends Celular {
         for (Ligacao l : ligacoesCobradas) {
             totalDaConta += l.getValorCobrado();
         }
-        return totalDaConta;
+        List<String> info = new Vector<String>();
+        info.add("valor da conta");
+        info.add("" + totalDaConta);
+        return info;
     }
 }
