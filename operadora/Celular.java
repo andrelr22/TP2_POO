@@ -11,9 +11,13 @@
 package operadora;
 
 public class Celular {
+    static private int proximoNumero = 0;
+
     private String numero;
 
-    public Celular(String numero) {
-        this.numero = numero;
+    public Celular() {
+        // Formato 0 0000 0000 para os numeros de telefone
+        System.out.println("Criando celular " + String.format("%09d", proximoNumero + 1));
+        this.numero = String.format("%09d", proximoNumero++);
     }
 }

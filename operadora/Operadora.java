@@ -66,4 +66,21 @@ public class Operadora {
         }
         return false;
     }
+
+    // TODO Implementar tipos de celular e data da fatura
+    public void addCelular(String cpf_cnpj,
+                           String nomeDoPlano) throws ClienteInvalidoException,
+                                                      PlanoInvalidoException {
+        Cliente cliente = new Cliente("", "", cpf_cnpj);
+        if (!clienteJaExiste(cliente)) {
+            throw new ClienteInvalidoException("ERRO Nao existe cliente cadastrado com o CPF/CNPJ: ",
+                                               cliente);
+        }
+        Plano plano = new Plano(nomeDoPlano, 0);
+        if (!planoJaExiste(plano)) {
+            throw new PlanoInvalidoException("ERRO Nao existe plano cadastrado com o nome: ",
+                                             plano);
+        }
+        celulares.add(new Celular());
+    }
 }

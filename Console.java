@@ -23,18 +23,8 @@ public class Console {
 /************************* Criar Comandos aqui dentro *************************/
     static String[] comandos = {"ajuda",
                                 "cadastrar",
+                                "criar_celular",
                                 "criar_plano",
-                                "cobrar_tarifa",
-                                "cobrar_cpmf",
-                                "deposito",
-                                "excluir_cliente",
-                                "excluir_conta",
-                                "extrato",
-                                "listar_clientes",
-                                "listar_contas",
-                                "saldo",
-                                "saque",
-                                "transferencia",
                                 "sair"};
 
     private static boolean executarLinhaDeComando() {
@@ -45,6 +35,8 @@ public class Console {
             mostrarListaDeComandos();
         } else if (input.equals("cadastrar")) {
             cadastrarCliente();
+        } else if (input.equals("criar_celular")) {
+            criarCelular();
         } else if (input.equals("criar_plano")) {
             criarPlano();
         } else if (input.equals("cobrar_tarifa")) {
@@ -102,6 +94,30 @@ public class Console {
             return;
         }
         System.out.println(nome + " cadastrado com sucesso");
+    }
+
+    private static void criarCelular() {
+        // TODO Implementar tipos de celular e data da fatura
+        System.out.println("Insira informacoes para criacao do celular:");
+        String tipo = promptString("Tipo: cartao [c] ou assinatura [a]");
+        String cpf_cnpj = promptString("CPF/CNPJ do cliente");
+        String plano = promptString("Plano");
+        GregorianCalendar dataFatura = promptCalendar("Data de vencimento da fatura (dd/mm/aaaa ou default = hoje)");
+        String confirmacao = promptString("Confirmar criacao do celular? [s/n]");
+        if (!confirmacao.equals("s")) {
+            System.out.println("Criacao do celular foi cancelada pelo usuario");
+            return;
+        }
+        try {
+            operadora.addCelular(cpf_cnpj, plano);
+        } catch (ClienteInvalidoException excp) {
+            System.out.println(excp.getMessage() + excp.getCpfCnpj());
+            return;
+        } catch (PlanoInvalidoException excp) {
+            System.out.println(excp.getMessage() + excp.getNome());
+            return;
+        }
+        System.out.println("Celular cadastrado com sucesso");
     }
 
     private static void criarPlano() {
