@@ -25,6 +25,7 @@ public class Console {
                                 "cadastrar",
                                 "criar_celular",
                                 "criar_plano",
+                                "telefonar",
                                 "sair"};
 
     private static boolean executarLinhaDeComando() {
@@ -59,8 +60,8 @@ public class Console {
             saldo();
         } else if (input.equals("saque")) {
             saque();
-        } else if (input.equals("transferencia")) {
-            transferencia();
+        } else if (input.equals("telefonar")) {
+            telefonar();
         } else if (input.equals("sair")) {
             status = false;
         } else {
@@ -198,28 +199,24 @@ public class Console {
         }*/
     }
 
-    private static void transferencia() {
-        System.out.println("Insira informacoes para a transferencia:");
-        /*int numContaOrigem = promptInt("Numero da conta de origem");
-        int numContaDestino = promptInt("Numero da conta de destino");
-        double valor = promptDouble("Valor");
-        String confirmacao = promptString("Confirmar transferencia de R$" + valor +
-                                          " da conta " + numContaOrigem +
-         	                              " para a conta " + numContaDestino + " ? [s/n]");
-        if (confirmacao.equals("s")) {
-           int status = banco.transferencia(numContaOrigem, numContaDestino , valor);
-           if (status==-1) {
-               System.out.println("Numero de conta origem é invalido");
-           } else if(status==-2){
-               System.out.println("Numero de conta destino é invalido");
-           } else if(status==-3){
-               System.out.println("Saldo insuficiente");
-           } else {
-               System.out.println("Transferencia realizada com sucesso");
-           }
-        } else {
-            System.out.println("Transferencia cancelada pelo usuario");
-        }*/
+    private static void telefonar() {
+        System.out.println("Insira informacoes para o registro da ligacao:");
+        String numeroDoCelular = promptString("Numero do celular");
+        // TODO Registrar tambem hora e minuto da ligacao
+        GregorianCalendar dataLigacao = promptCalendar("Data da ligacao(dd/mm/aaaa ou default = hoje)");
+        double duracao = promptDouble("Duracao da chamada (minutos)");
+        String confirmacao = promptString("Confirmar ligacao? [s/n]");
+        if (!confirmacao.equals("s")) {
+            System.out.println("Ligacao cancelada pelo usuario");
+            return;
+        }
+        try {
+            operadora.registrarLigacao(numeroDoCelular, dataLigacao, duracao);
+        } catch (CelularInvalidoException excp) {
+            System.out.println(excp.getMessage() + excp.getNumeroDoCelular());
+            return;
+        }
+        System.out.println("Ligacao concluida com sucesso");
     }
 
     private static void cobrarTarifa() {

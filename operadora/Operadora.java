@@ -92,4 +92,23 @@ public class Operadora {
             celulares.add(new CelularPosPago(dataFatura));
         }
     }
+
+    private Celular getCelular(String numeroDoCelular) {
+        for (Celular c : celulares) {
+            if (c.getNumero().equals(numeroDoCelular)) {
+                return c;
+            }
+        }
+        return null;
+    }
+
+    public void registrarLigacao(String numeroDoCelular,
+                                 GregorianCalendar dataHora,
+                                 double duracao) throws CelularInvalidoException {
+        Celular celular = getCelular(numeroDoCelular);
+        if (celular == null) {
+            throw new CelularInvalidoException("ERRO Nao existe celular com o numero: ", numeroDoCelular);
+        }
+        celular.registrarLigacao(dataHora, duracao);
+    }
 }
