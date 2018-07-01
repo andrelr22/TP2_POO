@@ -26,11 +26,8 @@ public class Console {
                                 "cadastrar",
                                 "criar_celular",
                                 "criar_plano",
-<<<<<<< HEAD
                                 "excluir_celular",
-=======
                                 "extrato",
->>>>>>> 6e4193309f2cda7ce9a4cdf27ad5465f0d5c7428
                                 "telefonar",
                                 "add_creditos",
                                 "sair"};
