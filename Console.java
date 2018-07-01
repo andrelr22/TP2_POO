@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.Scanner;
 
-import excecoes.ClienteInvalidoException;
+import excecoes.*;
 
 import operadora.Operadora;
 
@@ -23,7 +23,7 @@ public class Console {
 /************************* Criar Comandos aqui dentro *************************/
     static String[] comandos = {"ajuda",
                                 "cadastrar",
-                                "criar_conta",
+                                "criar_plano",
                                 "cobrar_tarifa",
                                 "cobrar_cpmf",
                                 "deposito",
@@ -45,8 +45,8 @@ public class Console {
             mostrarListaDeComandos();
         } else if (input.equals("cadastrar")) {
             cadastrarCliente();
-        } else if (input.equals("criar_conta")) {
-            criarConta();
+        } else if (input.equals("criar_plano")) {
+            criarPlano();
         } else if (input.equals("cobrar_tarifa")) {
             cobrarTarifa();
         } else if (input.equals("cobrar_cpmf")) {
@@ -104,18 +104,22 @@ public class Console {
         System.out.println(nome + " cadastrado com sucesso");
     }
 
-    private static void criarConta() {
-        System.out.println("Insira informacoes para criacao da conta:");
-        /*String cpf_cnpj = promptString("CPF/CNPJ");
-        banco.Cliente cliente = banco.getCliente(cpf_cnpj);
-        if (cliente == null){
-            System.out.println("ERRO: Nenhum cliente cadastrado com CPF/CNPJ " + cpf_cnpj);
+    private static void criarPlano() {
+        System.out.println("Insira informacoes para cadastro do plano:");
+        String nome = promptString("Nome do plano");
+        double valorPorMinuto = promptDouble("Valor por minuto");
+        String confirmacao = promptString("Confirmar cadastro do plano? [s/n]");
+        if (!confirmacao.equals("s")) {
+            System.out.println("Cadastro do plano foi cancelado pelo usuario");
             return;
         }
-        banco.Conta conta = banco.criaConta(cliente);
-        System.out.println("Criacao da conta numero " + conta.getNumConta() +
-                           " para " + cliente.getNome() +
-                           " concluida com sucesso");*/
+        try {
+            operadora.addPlano(nome, valorPorMinuto);
+        } catch (PlanoInvalidoException excp) {
+            System.out.println(excp.getMessage() + excp.getNome());
+            return;
+        }
+        System.out.println("Plano " + nome + " cadastrado com sucesso");
     }
 
     private static void excluirCliente() {

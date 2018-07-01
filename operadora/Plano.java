@@ -10,12 +10,26 @@
 
 package operadora;
 
-class Plano {
+public class Plano {
     private String nome;
     private double valorPorMinuto;
 
     public Plano(String nome, double valorPorMinuto) {
         this.nome = nome;
         this.valorPorMinuto = valorPorMinuto;
+    }
+
+    public Plano(Plano outro) {
+        this.nome = outro.nome;
+        this.valorPorMinuto = outro.valorPorMinuto;
+    }
+
+    public boolean equals(Plano outro) {
+        return this.nome.equals(outro.nome);
+    }
+
+    public String getNome() {
+        String copia = new String(nome);
+        return copia;
     }
 }

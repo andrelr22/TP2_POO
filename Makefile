@@ -20,8 +20,12 @@ BLOCK_WARNINGS = -Werror -Xlint # Treat any compilation warning as error
 	$(COMPILE) $(DEBUG) -d $(DESTINY_DIR) $(BLOCK_WARNINGS) $*.java
 
 MAIN = Console.java
+
 OPERADORA = ./operadora/Operadora.java
-EXCECOES = ./excecoes/ClienteInvalidoException.java
+
+EXCECOES = ./excecoes/ClienteInvalidoException.java \
+		   ./execoes/PlanoInvalidoException.java
+
 OPERADORA_ITEMS = ./operadora/Cliente.java \
 				  ./operadora/Plano.java
 

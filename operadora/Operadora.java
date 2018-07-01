@@ -13,7 +13,7 @@ package operadora;
 import java.util.List;
 import java.util.Vector;
 
-import excecoes.ClienteInvalidoException;
+import excecoes.*;
 
 public class Operadora {
     private String nome;
@@ -40,6 +40,25 @@ public class Operadora {
     private boolean clienteJaExiste(Cliente cliente) {
         for (Cliente c : clientes) {
             if (c.equals(cliente)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void addPlano(String nome,
+                         double valorPorMinuto) throws PlanoInvalidoException {
+        Plano novoPlano = new Plano(nome, valorPorMinuto);
+        if (planoJaExiste(novoPlano)) {
+            throw new PlanoInvalidoException("ERRO Ja existe plano cadastrado com o nome: ",
+                                             novoPlano);
+        }
+        planos.add(novoPlano);
+    }
+
+    private boolean planoJaExiste(Plano plano) {
+        for (Plano p : planos) {
+            if (p.equals(plano)) {
                 return true;
             }
         }
