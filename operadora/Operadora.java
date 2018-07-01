@@ -127,6 +127,9 @@ public class Operadora {
         if (celular == null) {
             throw new CelularInvalidoException("ERRO Nao existe celular com o numero: ", numeroDoCelular);
         }
+        dataInicial.set(GregorianCalendar.HOUR_OF_DAY, 0);
+        dataInicial.set(GregorianCalendar.MINUTE, 0);
+        dataInicial.set(GregorianCalendar.SECOND, 0);
         return celular.getLigacoes(dataInicial);
     }
 }

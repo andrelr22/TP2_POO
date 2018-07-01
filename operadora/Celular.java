@@ -40,10 +40,12 @@ public abstract class Celular {
     public List<Ligacao> getLigacoes(GregorianCalendar dataInicial) {
         List<Ligacao> extrato = new Vector<Ligacao>();
         GregorianCalendar hoje = new GregorianCalendar();
+        hoje.set(GregorianCalendar.HOUR_OF_DAY, GregorianCalendar.getInstance().getMaximum(GregorianCalendar.HOUR_OF_DAY));
+        hoje.set(GregorianCalendar.MINUTE, GregorianCalendar.getInstance().getMaximum(GregorianCalendar.MINUTE));
+        hoje.set(GregorianCalendar.SECOND, GregorianCalendar.getInstance().getMaximum(GregorianCalendar.SECOND));
+
         for (Ligacao l : ligacoes) {
             GregorianCalendar dataHora = l.getDataHora();
-            // FIXME Ainda pode haver algum bug relativo a comparacao dos
-            // minutos
             if ((dataHora.after(dataInicial) ||
                  dataHora.equals(dataInicial)) &&
                 (dataHora.before(hoje) ||
