@@ -45,7 +45,7 @@ public class Console {
         } else if (input.equals("criar_plano")) {
             criarPlano();
         } else if (input.equals("add_creditos")){
-        	adicionaCreditos(); 
+        	adicionaCreditos();
         } else if (input.equals("cobrar_tarifa")) {
             cobrarTarifa();
         } else if (input.equals("cobrar_cpmf")) {
@@ -159,7 +159,7 @@ public class Console {
        } else if (operadora.removeCelular(numero)==-2){
        	System.out.println("numero de celular não encontrado");
        }
-       //TODO corrigir o erro e adicionar situações condicionais que impeçam a exclusao 
+       //TODO corrigir o erro e adicionar situações condicionais que impeçam a exclusao
 
     }
 
@@ -370,8 +370,27 @@ public class Console {
         System.out.println("\nEntre o comando 'ajuda' para obter uma lista dos comandos disponiveis\n");
     }
 
+    private static void setupTeste() {
+        hoje = new GregorianCalendar();
+        System.out.println("-teste: Iniciando setup de teste");
+        operadora.addCliente("ze", "rua do ze", "123");
+        operadora.addCliente("jao", "rua do jao", "456");
+        operadora.addPlano("basico", 1000);
+        operadora.addPlano("premium", 2000);
+        operadora.addCelular(true, "123", "basico", hoje);
+        operadora.addCelular(false, "123", "premium", hoje);
+        operadora.addCelular(true, "456", "basico", hoje);
+        operadora.registrarLigacao("000000000", hoje, 5);
+        operadora.registrarLigacao("000000000", hoje, 6);
+        operadora.registrarLigacao("000000001", hoje, 7);
+        operadora.registrarLigacao("000000002", hoje, 8);
+    }
+
     public static void main(String[] args) {
         iniciarLinhaDeComando();
+        if (args.contains("-teste")) {
+            setupTeste();
+        }
         boolean status = true;
         while (status) {
             status = executarLinhaDeComando();
