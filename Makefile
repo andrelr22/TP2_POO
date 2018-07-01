@@ -21,7 +21,7 @@ BLOCK_WARNINGS = -Werror -Xlint # Treat any compilation warning as error
 
 MAIN = Console.java
 OPERADORA = ./operadora/Operadora.java
-EXCECOES = ./operadora/ClienteInvalidoException.java
+EXCECOES = ./excecoes/ClienteInvalidoException.java
 CLIENTE = ./operadora/Cliente.java
 
 all: $(MAIN:.java=.class)
@@ -33,5 +33,6 @@ $(OPERADORA:.java=.class): $(EXCECOES:.java=.class)
 $(EXCECOES:.java=.class): $(CLIENTE:.java=.class)
 
 clean:
+	$(RM) ./excecoes/*.class
 	$(RM) ./operadora/*.class
 	$(RM) ./*.class

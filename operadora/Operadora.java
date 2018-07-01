@@ -13,6 +13,8 @@ package operadora;
 import java.util.List;
 import java.util.Vector;
 
+import excecoes.ClienteInvalidoException;
+
 public class Operadora {
     private String nome;
     private List<Cliente> clientes;

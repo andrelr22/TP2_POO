@@ -14,8 +14,9 @@ import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.Scanner;
 
+import excecoes.ClienteInvalidoException;
+
 import operadora.Operadora;
-import operadora.ClienteInvalidoException;
 
 public class Console {
 

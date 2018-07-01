@@ -8,7 +8,9 @@
 // Andre Lage
 // Augusto Mafra
 
-package operadora;
+package excecoes;
+
+import operadora.Cliente;
 
 public class ClienteInvalidoException extends Exception {
     // Isso deve ser somente algum identificador unico para a classe.
