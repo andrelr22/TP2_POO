@@ -86,11 +86,14 @@ public class Operadora {
             throw new PlanoInvalidoException("ERRO Nao existe plano cadastrado com o nome: ",
                                              plano);
         }
+        Celular novoCelular;
         if (prePago) {
-            celulares.add(new CelularPrePago());
+            novoCelular = new CelularPrePago(plano);
         } else {
-            celulares.add(new CelularPosPago(dataFatura));
+            novoCelular = new CelularPosPago(plano, dataFatura);
         }
+        celulares.add(novoCelular);
+        cliente.addCelular(novoCelular);
     }
 
     private Celular getCelular(String numeroDoCelular) {

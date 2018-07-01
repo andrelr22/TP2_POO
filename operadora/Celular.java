@@ -19,11 +19,13 @@ public abstract class Celular {
 
     private String numero;
     private List<Ligacao> ligacoes;
+    private Plano plano;
 
-    public Celular() {
+    public Celular(Plano plano) {
         // Formato 0 0000 0000 para os numeros de telefone
         this.numero = String.format("%09d", proximoNumero++);
         this.ligacoes = new Vector<Ligacao>();
+        this.plano = plano;
     }
 
     public String getNumero() {

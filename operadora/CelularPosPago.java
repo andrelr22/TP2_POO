@@ -15,8 +15,8 @@ import java.util.GregorianCalendar;
 public class CelularPosPago extends Celular {
     private GregorianCalendar dataDaFatura;
 
-    public CelularPosPago(GregorianCalendar dataDaFatura) {
-        super();
+    public CelularPosPago(Plano plano, GregorianCalendar dataDaFatura) {
+        super(plano);
         this.dataDaFatura = dataDaFatura;
     }
 }

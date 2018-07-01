@@ -16,8 +16,8 @@ public class CelularPrePago extends Celular {
     private double saldo;
     private GregorianCalendar dataDeValidadeDoSaldo;
 
-    public CelularPrePago() {
-        super();
+    public CelularPrePago(Plano plano) {
+        super(plano);
         saldo = 0;
         dataDeValidadeDoSaldo = new GregorianCalendar(); // hoje
     }
