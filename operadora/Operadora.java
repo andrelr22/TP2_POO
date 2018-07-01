@@ -68,7 +68,7 @@ public class Operadora {
         return null;
     }
 
-    public void addCelular(boolean prePago,
+    public String addCelular(boolean prePago,
                            String cpf_cnpj,
                            String nomeDoPlano,
                            GregorianCalendar dataFatura) throws ClienteInvalidoException,
@@ -88,12 +88,13 @@ public class Operadora {
         }
         Celular novoCelular;
         if (prePago) {
-            novoCelular = new CelularPrePago(plano);
+            novoCelular = new CelularPrePago(plano, cpf_cnpj);
         } else {
-            novoCelular = new CelularPosPago(plano, dataFatura);
+            novoCelular = new CelularPosPago(plano, dataFatura, cpf_cnpj);
         }
         celulares.add(novoCelular);
         cliente.addCelular(novoCelular);
+        return (novoCelular.getNumero());
     }
 
     private Celular getCelular(String numeroDoCelular) {
@@ -118,6 +119,55 @@ public class Operadora {
         celular.registrarLigacao(dataHora, duracao);
     }
 
+<<<<<<< HEAD
+    public int removeCelular(String numeroDoCelular){
+        int contador=0;
+        for(Celular c : celulares){
+            if(numeroDoCelular.equals(c.getNumero())){
+                System.out.println("yo");
+                String cpf = c.getCpf();
+                celulares.remove(contador);
+                System.out.println("yo");
+                int contador2=0;
+                for (Cliente cl: clientes){
+                   System.out.println("for cliente");
+                    if(cpf.equals(cl.getCpfCnpj())){
+                        System.out.println("achou o cpf igual");
+                        if(cl.removeCelular(numeroDoCelular)==true){
+                            System.out.println("operacao com sucesso");
+                         return 1;
+                        }
+                        else{
+                            System.out.println("operacao fracassou");
+                           return -1; 
+                        } 
+                    }
+                    contador2=contador2 + 1;
+                }
+                System.out.println("nao achou o cliente com o cpf");
+                return -1;
+            } 
+            System.out.println("antes contador");
+            contador=contador+1;
+        }
+        return -2;
+    }
+
+    public int adicionaCreditos(String numeroCelular, int valor){
+        Celular C;
+        if(C==null){
+            return -2;
+        }
+        if(C.isPosPago()==false){
+            ((CelularPrePago) C).addSaldo(valor);
+            return 1;
+        }else{
+            return -1;
+        }
+        }
+    }
+        return-2;
+=======
     public List<Ligacao> getExtrato(String numeroDoCelular,
                                     GregorianCalendar dataInicial) throws CelularInvalidoException {
         if (dataInicial == null) {
@@ -131,5 +181,6 @@ public class Operadora {
         dataInicial.set(GregorianCalendar.MINUTE, 0);
         dataInicial.set(GregorianCalendar.SECOND, 0);
         return celular.getLigacoes(dataInicial);
+>>>>>>> 6e4193309f2cda7ce9a4cdf27ad5465f0d5c7428
     }
 }

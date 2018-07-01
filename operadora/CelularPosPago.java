@@ -15,8 +15,12 @@ import java.util.GregorianCalendar;
 public class CelularPosPago extends Celular {
     private GregorianCalendar dataDaFatura;
 
-    public CelularPosPago(Plano plano, GregorianCalendar dataDaFatura) {
-        super(plano);
+    public CelularPosPago(Plano plano, GregorianCalendar dataDaFatura, String cpf) {
+        super(plano, cpf);
         this.dataDaFatura = dataDaFatura;
+    }
+
+    public boolean isPosPago(){
+    	return true;
     }
 }

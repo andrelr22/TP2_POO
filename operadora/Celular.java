@@ -17,15 +17,23 @@ import java.util.Vector;
 public abstract class Celular {
     static private int proximoNumero = 0;
 
+    private String cpf_cliente;
     private String numero;
     private List<Ligacao> ligacoes;
     private Plano plano;
 
-    public Celular(Plano plano) {
+
+    public Celular(Plano plano, String  cpf) {
         // Formato 0 0000 0000 para os numeros de telefone
+        cpf_cliente = cpf;
         this.numero = String.format("%09d", proximoNumero++);
         this.ligacoes = new Vector<Ligacao>();
         this.plano = plano;
+    }
+
+    public String getCpf(){
+        String copia = new String(cpf_cliente);
+        return copia;
     }
 
     public String getNumero() {
@@ -55,4 +63,6 @@ public abstract class Celular {
         }
         return extrato;
     }
+
+    public abstract boolean isPosPago();
 }
