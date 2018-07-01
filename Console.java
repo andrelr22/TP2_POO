@@ -14,6 +14,7 @@ import java.util.Arrays;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Vector;
 
 import excecoes.*;
 
@@ -25,6 +26,7 @@ public class Console {
 /************************* Criar Comandos aqui dentro *************************/
     static String[] comandos = {"ajuda",
                                 "cadastrar",
+                                "celular_info",
                                 "criar_celular",
                                 "criar_plano",
                                 "excluir_celular",
@@ -47,8 +49,8 @@ public class Console {
             criarPlano();
         } else if (input.equals("add_creditos")){
         	adicionaCreditos();
-        } else if (input.equals("cobrar_tarifa")) {
-            cobrarTarifa();
+        } else if (input.equals("celular_info")) {
+            obterInfoDoCelular();
         } else if (input.equals("cobrar_cpmf")) {
             cobrarCPMF();
         } else if (input.equals("deposito")) {
@@ -64,7 +66,7 @@ public class Console {
         } else if (input.equals("listar_contas")) {
             listarContas();
         } else if (input.equals("saldo")) {
-            saldo();
+            //saldo();
         } else if (input.equals("saque")) {
             saque();
         } else if (input.equals("telefonar")) {
@@ -250,15 +252,17 @@ public class Console {
         System.out.println("CPMF cobrada com sucesso");
     }
 
-    private static void saldo() {
-        System.out.println("Insira o número da conta cujo saldo se deseja consutar:");
-        /*int numConta = promptInt("Numero da conta");
-        double saldo = banco.saldo(numConta);
-        if (saldo == -1){
-            System.out.println("ERRO: Nenhuma conta com o número " + numConta);
+    private static void obterInfoDoCelular() {
+        System.out.println("Insira informacoes para consulta do celular:");
+        String numeroDoCelular = promptString("Numero do celular");
+        List<String> info = new Vector<String>();
+        try {
+            info = operadora.obterInfoDoCelular(numeroDoCelular);
+        } catch (CelularInvalidoException excp) {
+            System.out.println(excp.getMessage() + excp.getNumeroDoCelular());
             return;
         }
-        System.out.println("O saldo da conta " + numConta  + " é " + saldo);*/
+        System.out.println(info);
     }
 
     private static void extrato() {

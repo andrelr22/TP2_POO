@@ -22,11 +22,12 @@ public class CelularPrePago extends Celular {
         dataDeValidadeDoSaldo = new GregorianCalendar(); // hoje
     }
 
-        public boolean isPosPago(){
+    public boolean isPosPago(){
     	return false;
     }
-    	public void addSaldo(int valor){
-    		saldo=saldo+valor;
-    		dataDeValidadeDoSaldo.add(GregorianCalendar.DAY_OF_MONTH, 180);
-    	}
+
+    public void addSaldo(int valor){
+        saldo=saldo+valor;
+        dataDeValidadeDoSaldo.add(GregorianCalendar.DAY_OF_MONTH, 180);
+    }
 }

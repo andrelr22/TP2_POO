@@ -11,6 +11,7 @@
 package operadora;
 
 import java.util.GregorianCalendar;
+import java.util.List;
 
 public class CelularPosPago extends Celular {
     private GregorianCalendar dataDaFatura;
@@ -22,5 +23,23 @@ public class CelularPosPago extends Celular {
 
     public boolean isPosPago(){
     	return true;
+    }
+
+    public double cobrarMes() {
+        int diaDaFatura = dataDaFatura.get(GregorianCalendar.DAY_OF_MONTH);
+
+        GregorianCalendar mesAnterior = new GregorianCalendar();
+        mesAnterior.add(GregorianCalendar.MONTH, -1);
+        mesAnterior.set(GregorianCalendar.DAY_OF_MONTH, diaDaFatura);
+
+        GregorianCalendar mesAtual = new GregorianCalendar();
+        mesAtual.set(GregorianCalendar.DAY_OF_MONTH, diaDaFatura);
+
+        List<Ligacao> ligacoesCobradas = getLigacoes(mesAnterior, mesAtual);
+        double totalDaConta = 0;
+        for (Ligacao l : ligacoesCobradas) {
+            totalDaConta += l.getValorCobrado();
+        }
+        return totalDaConta;
     }
 }

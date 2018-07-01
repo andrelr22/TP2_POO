@@ -180,4 +180,22 @@ public class Operadora {
         dataInicial.set(GregorianCalendar.SECOND, 0);
         return celular.getLigacoes(dataInicial);
     }
+
+    public List<String> obterInfoDoCelular(String numeroDoCelular) throws CelularInvalidoException {
+        Celular celular = getCelular(numeroDoCelular);
+        if (celular == null) {
+            throw new CelularInvalidoException("ERRO Nao existe celular com o numero: ", numeroDoCelular);
+        }
+        List<String> info = new Vector<String>();
+        info.add("tipo");
+        if (celular.isPosPago()) {
+            info.add("pos-pago");
+            info.add("valor da conta");
+            info.add("" + ((CelularPosPago) celular).cobrarMes());
+        } else {
+            info.add("pre-pago");
+            // TODO Acrescentar informacao para celular pre pago
+        }
+        return info;
+    }
 }

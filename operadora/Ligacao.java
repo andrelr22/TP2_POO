@@ -37,4 +37,8 @@ public class Ligacao {
         result += "\n";
         return result;
     }
+
+    public double getValorCobrado() {
+        return valorCobrado;
+    }
 }
