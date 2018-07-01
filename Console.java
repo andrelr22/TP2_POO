@@ -225,8 +225,8 @@ public class Console {
     private static void telefonar() {
         System.out.println("Insira informacoes para o registro da ligacao:");
         String numeroDoCelular = promptString("Numero do celular");
-        // TODO Registrar tambem hora e minuto da ligacao
         GregorianCalendar dataLigacao = promptCalendar("Data da ligacao(dd/mm/aaaa ou default = hoje)");
+        GregorianCalendar horaLigacao = promptHora("Horario da ligacao(hh:mm ou default = agora)");
         double duracao = promptDouble("Duracao da chamada (minutos)");
         String confirmacao = promptString("Confirmar ligacao? [s/n]");
         if (!confirmacao.equals("s")) {
@@ -350,6 +350,33 @@ public class Console {
             mes < 0) {
             System.out.println("\tERRO: Insira um " + descricao + " valido");
             input = promptCalendar(descricao);
+        }
+        return input;
+    }
+
+    private static GregorianCalendar promptHora(String descricao) {
+        GregorianCalendar input = new GregorianCalendar();
+        System.out.print("\t>>> " + descricao + ": ");
+        String inputString = scan.nextLine();
+        if (inputString.equals("default") || inputString.equals("")) return null;
+        String[] horaInfo = inputString.split(":");
+        int hora = 0, minuto = 0;
+        try {
+            hora = Integer.parseInt(horaInfo[0]);
+            minuto = Integer.parseInt(horaInfo[1]);
+        } catch(NumberFormatException e) {
+            System.out.println("\tERRO: Insira um " + descricao + " valido");
+            input = promptHora(descricao);
+        } catch(ArrayIndexOutOfBoundsException e) {
+            System.out.println("\tERRO: Insira um " + descricao + " valido");
+            input = promptHora(descricao);
+        }
+        input = new GregorianCalendar();
+        input.set(GregorianCalendar.HOUR_OF_DAY, hora);
+        input.set(GregorianCalendar.MINUTE, minuto);
+        if (hora > 23 || minuto > 59) {
+            System.out.println("\tERRO: Insira um " + descricao + " valido");
+            input = promptHora(descricao);
         }
         return input;
     }
