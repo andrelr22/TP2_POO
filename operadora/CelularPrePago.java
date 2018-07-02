@@ -30,7 +30,7 @@ public class CelularPrePago extends Celular {
     	return false;
     }
 
-    public void addSaldo(int valor){
+    public void addSaldo(double valor){
         saldo=saldo+valor;
         dataDeValidadeDoSaldo.add(GregorianCalendar.DAY_OF_MONTH, 180);
     }
@@ -41,6 +41,11 @@ public class CelularPrePago extends Celular {
             throw new CelularInvalidoException("ERRO Saldo insuficiente para realizar ligacao no celular: ",
                                                 getNumero());
         }
+        if (dataHora.after(dataDeValidadeDoSaldo)) {
+            throw new CelularInvalidoException("ERRO O saldo ultrapassou a data de validade para o celular: ",
+                                                getNumero());
+        }
+        saldo -= valor;
         super.registrarLigacao(dataHora, duracao);
     }
 

@@ -22,18 +22,20 @@ import operadora.Ligacao;
 public class Console {
 
 /************************* Criar Comandos aqui dentro *************************/
-    static String[] comandos = {"ajuda",
-                                "add_creditos",
-                                "cadastrar",
-                                "celular_info",
-                                "criar_celular",
-                                "criar_plano",
-                                "excluir_celular",
-                                "extrato",
-                                "telefonar",
-                                "listar",
-                                "itens_vencidos",
-                                "sair"};
+
+    static private String[] comandos = {"ajuda",
+                                        "add_creditos",
+                                        "cadastrar",
+                                        "celular_info",
+                                        "criar_celular",
+                                        "criar_plano",
+                                        "excluir_celular",
+                                        "extrato",
+                                        "telefonar",
+                                        "listar",
+                                        "itens_vencidos",
+                                        "sair"};
+
 
     private static boolean executarLinhaDeComando() {
         System.out.print("> ");
@@ -160,15 +162,14 @@ public class Console {
     private static void adicionaCreditos(){
     	System.out.println("Insira as informações necessárias para a adiçao de creditos");
     	String numero = promptString("Numero do Celular");
-    	int creditos = promptInt("Quantidade de creditos a ser adicionados");
-    	int retorno = operadora.adicionaCreditos(numero, creditos);
-    	if (retorno==1){
-    		System.out.println("creditos adicionados com sucesso");
-    	} else if(retorno==-1) {
-    		System.out.println("ERRO: O celular não é do tipo pré pago");
-    	} else if (retorno==-2){
-    		System.out.println("ERRO: Número de celular não encontrado");
-    	}
+    	double creditos = promptDouble("Quantidade de creditos a ser adicionados");
+    	try {
+            operadora.adicionaCreditos(numero, creditos);
+        } catch (CelularInvalidoException excp) {
+            System.out.println(excp.getMessage() + excp.getNumeroDoCelular());
+            return;
+        }
+        System.out.println("Creditos adicionados com sucesso");
     }
 
     private static void listar(){
