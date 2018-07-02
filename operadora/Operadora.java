@@ -176,7 +176,7 @@ public class Operadora {
         if (C.isPosPago() == false) {
             double saldo = ((CelularPrePago) C).getSaldo();
             return saldo;
-        } else {
+        } else { 
             return -1;
         }
     }
@@ -207,4 +207,43 @@ public class Operadora {
         info.addAll(celular.obterInfo());
         return info;
     }
+
+
+
+    public List<String> listarCelulares(){
+        List<String> info = new Vector<String>();
+        for (Celular c : celulares){
+           info.add("Número: " + c.getNumero());
+           info.add("CPF/CNPJ do cliente: " + c.getCpf());
+           info.add(" "); 
+        }
+
+        return info;
+    }
+    
+        public List<String> listarPlanos(){
+            List<String> info = new Vector<String>();
+            for (Plano p : planos){
+               info.add("Nome do plano: " + p.getNome());
+               info.add("Valor por minuto: " + p.getValor());
+               info.add(" "); 
+            }
+        return info;
+    }
+
+    public List<String> listarClientes(){
+        List<String> info = new Vector<String>();
+        for (Cliente c : clientes){
+           info.add("Nome: " + c.getNome());
+           info.add("CPF/CNPJ: " + c.getCpfCnpj());
+           info.add("Endereco: " + c.getEndereco());
+           info.add("Celulares do Cliente: ");
+           info.addAll(c.getCelulares()); 
+           info.add(" ");
+           //System.out.println("Nome: " + c.getNome() +  " ; CPF/CNPJ: " + c.getCpfCnpj() + " ; Endereço: " + c.getEndereco); 
+        }
+        return info;
+    }
+
+
 }
