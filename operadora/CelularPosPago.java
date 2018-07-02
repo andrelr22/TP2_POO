@@ -25,7 +25,7 @@ public class CelularPosPago extends Celular {
     public boolean isPosPago(){
     	return true;
     }
-
+    
     public List<String> obterInfo() {
         int diaDaFatura = dataDaFatura.get(GregorianCalendar.DAY_OF_MONTH);
 

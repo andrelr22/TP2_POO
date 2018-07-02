@@ -123,10 +123,9 @@ public class Operadora {
         int contador=0;
         for(Celular c : celulares){
             if(numeroDoCelular.equals(c.getNumero())){
-                System.out.println("yo");
                 String cpf = c.getCpf();
                 celulares.remove(contador);
-                System.out.println("yo");
+                /*System.out.println("yo");
                 int contador2=0;
                 for (Cliente cl: clientes){
                    System.out.println("for cliente");
@@ -142,11 +141,14 @@ public class Operadora {
                         }
                     }
                     contador2=contador2 + 1;
+
                 }
+
                 System.out.println("nao achou o cliente com o cpf");
                 return -1;
+                */
+                return 1;
             }
-            System.out.println("antes contador");
             contador=contador+1;
         }
         return -2;
@@ -164,6 +166,19 @@ public class Operadora {
             return -1;
         }
         //return-2;
+    }
+
+    public double consultaSaldo(String numeroCelular){
+        Celular C=getCelular(numeroCelular);
+         if (C == null) {
+            return -2;
+        }
+        if (C.isPosPago() == false) {
+            double saldo = ((CelularPrePago) C).getSaldo();
+            return saldo;
+        } else {
+            return -1;
+        }
     }
 
     public List<Ligacao> getExtrato(String numeroDoCelular,

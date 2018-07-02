@@ -33,6 +33,10 @@ public class CelularPrePago extends Celular {
         dataDeValidadeDoSaldo.add(GregorianCalendar.DAY_OF_MONTH, 180);
     }
 
+    public double getSaldo(){
+ 		return this.saldo;
+    }
+
     public List<String> obterInfo() {
         List<String> info = new Vector<String>();
         info.add("saldo");

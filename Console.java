@@ -33,6 +33,7 @@ public class Console {
                                 "extrato",
                                 "telefonar",
                                 "add_creditos",
+                                "consulta_saldo",
                                 "sair"};
 
     private static boolean executarLinhaDeComando() {
@@ -49,6 +50,8 @@ public class Console {
             criarPlano();
         } else if (input.equals("add_creditos")){
         	adicionaCreditos();
+        } else if (input.equals("consulta_saldo")){
+        	consultaSaldo(); 	
         } else if (input.equals("celular_info")) {
             obterInfoDoCelular();
         } else if (input.equals("cobrar_cpmf")) {
@@ -178,6 +181,20 @@ public class Console {
     	} else if (retorno==-2){
     		System.out.println("ERRO: Número de celular não encontrado");
     	}
+    }
+
+    private static void consultaSaldo(){
+    	System.out.println("Insira as informações necessárias para a consulta");
+    	String numero = promptString("Numero do Celular");
+    	double retorno = operadora.consultaSaldo(numero);
+    	if (retorno==-1){
+    		System.out.println("ERRO: Celular cadastrado não é do tipo pre pago");
+    	}else if(retorno==-2){
+    		System.out.println("ERRO: Numero de celular não encontrado");
+    	}else{
+    		System.out.println("O saldo do celular de número " + numero + " é " + retorno);
+    	}
+    	//TODO -> ADICIONAR CONSULTA A DATA DE EXPIRAÇÃO DOS CRÉDITOS! 
     }
 
     private static void excluirConta() {
