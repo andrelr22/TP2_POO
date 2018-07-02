@@ -22,17 +22,17 @@ import operadora.Ligacao;
 public class Console {
 
 /************************* Criar Comandos aqui dentro *************************/
-    static String[] comandos = {"ajuda",
-                                "add_creditos",
-                                "cadastrar",
-                                "celular_info",
-                                "criar_celular",
-                                "criar_plano",
-                                "excluir_celular",
-                                "extrato",
-                                "telefonar",
-                                "listar",
-                                "sair"};
+    static private String[] comandos = {"ajuda",
+                                        "add_creditos",
+                                        "cadastrar",
+                                        "celular_info",
+                                        "criar_celular",
+                                        "criar_plano",
+                                        "excluir_celular",
+                                        "extrato",
+                                        "telefonar",
+                                        "listar",
+                                        "sair"};
 
     private static boolean executarLinhaDeComando() {
         System.out.print("> ");
