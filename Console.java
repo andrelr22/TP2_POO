@@ -34,6 +34,7 @@ public class Console {
                                 "telefonar",
                                 "add_creditos",
                                 "consulta_saldo",
+                                "listar",
                                 "sair"};
 
     private static boolean executarLinhaDeComando() {
@@ -64,8 +65,8 @@ public class Console {
             excluirConta();
         } else if (input.equals("extrato")) {
             extrato();
-        } else if (input.equals("listar_clientes")) {
-            listarClientes();
+        } else if (input.equals("listar")) {
+            listar();
         } else if (input.equals("listar_contas")) {
             listarContas();
         } else if (input.equals("saldo")) {
@@ -196,6 +197,49 @@ public class Console {
     		System.out.println("O saldo do celular de número " + numero + " é " + retorno);
     	}
     	//TODO -> ADICIONAR CONSULTA A DATA DE EXPIRAÇÃO DOS CRÉDITOS!
+    }
+
+    private static void listar(){
+    	String tipo = promptString("Digite o que se deseja listar: Clientes [c], Planos [p] ou Celulares[e]");
+    	if (tipo.equals("c")){
+    		
+    		System.out.println("Clientes cadastrados:");
+			
+			List<String> info = new Vector<String>();
+			info=operadora.listarClientes();	
+			
+			for (int i = 0; i < info.size(); i++) {
+	            System.out.println(info.get(i));
+	        }
+
+    	}else if(tipo.equals("p")){
+
+    		System.out.println("Planos Cadastrados");
+
+    		List<String> info = new Vector<String>();
+    		info=operadora.listarPlanos();
+
+    		for (int i = 0; i < info.size(); i++) {
+	            System.out.println(info.get(i));
+	        }
+
+    	}else if(tipo.equals("e")){
+
+    		System.out.println("Celulares cadastrados:");
+
+    		List<String> info = new Vector<String>();
+    		info=operadora.listarCelulares();
+
+    		for (int i = 0; i < info.size(); i++) {
+	            System.out.println(info.get(i));
+	        }
+
+    	}else{
+    		System.out.println("Comando inválido");
+    	}
+    	
+
+
     }
 
     private static void excluirConta() {

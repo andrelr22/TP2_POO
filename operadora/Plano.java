@@ -36,4 +36,8 @@ public class Plano {
     public double cobrar(double duracao) {
         return valorPorMinuto * duracao;
     }
+
+    public double getValor(){
+        return this.valorPorMinuto;
+    }
 }

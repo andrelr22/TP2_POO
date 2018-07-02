@@ -41,11 +41,30 @@ public class Cliente {
         return copia;
     }
 
+
+    public List<String> getCelulares(){
+        List<String> info = new Vector<String>();
+        for(Celular c:celulares){
+            info.add(c.getNumero()+ ";    ");
+        }
+        return info;
+    }
+
     public void addCelular(Celular celular) {
         celulares.add(celular);
     }
 
     public void removeCelular(Celular celular){
         celulares.remove(celular);
+    }
+
+    public String getNome(){
+        String copia = new String(nome);
+        return copia;
+    }
+
+        public String getEndereco(){
+        String copia = new String(endereco);
+        return copia;
     }
 }
