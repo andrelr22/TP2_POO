@@ -14,6 +14,8 @@ import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Vector;
 
+import excecoes.*;
+
 public class CelularPrePago extends Celular {
     private double saldo;
     private GregorianCalendar dataDeValidadeDoSaldo;
@@ -31,6 +33,15 @@ public class CelularPrePago extends Celular {
     public void addSaldo(int valor){
         saldo=saldo+valor;
         dataDeValidadeDoSaldo.add(GregorianCalendar.DAY_OF_MONTH, 180);
+    }
+
+    public void registrarLigacao(GregorianCalendar dataHora, double duracao) throws CelularInvalidoException {
+        double valor = plano.cobrar(duracao);
+        if (valor > saldo) {
+            throw new CelularInvalidoException("ERRO Saldo insuficiente para realizar ligacao no celular: ",
+                                                getNumero());
+        }
+        super.registrarLigacao(dataHora, duracao);
     }
 
     public double getSaldo(){

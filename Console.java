@@ -51,7 +51,7 @@ public class Console {
         } else if (input.equals("add_creditos")){
         	adicionaCreditos();
         } else if (input.equals("consulta_saldo")){
-        	consultaSaldo(); 	
+        	consultaSaldo();
         } else if (input.equals("celular_info")) {
             obterInfoDoCelular();
         } else if (input.equals("cobrar_cpmf")) {
@@ -194,7 +194,7 @@ public class Console {
     	}else{
     		System.out.println("O saldo do celular de número " + numero + " é " + retorno);
     	}
-    	//TODO -> ADICIONAR CONSULTA A DATA DE EXPIRAÇÃO DOS CRÉDITOS! 
+    	//TODO -> ADICIONAR CONSULTA A DATA DE EXPIRAÇÃO DOS CRÉDITOS!
     }
 
     private static void excluirConta() {
@@ -245,6 +245,7 @@ public class Console {
         System.out.println("Insira informacoes para o registro da ligacao:");
         String numeroDoCelular = promptString("Numero do celular");
         GregorianCalendar dataLigacao = promptCalendar("Data da ligacao(dd/mm/aaaa ou default = hoje)");
+        // TODO Usar hora da ligacao
         GregorianCalendar horaLigacao = promptHora("Horario da ligacao(hh:mm ou default = agora)");
         double duracao = promptDouble("Duracao da chamada (minutos)");
         String confirmacao = promptString("Confirmar ligacao? [s/n]");
