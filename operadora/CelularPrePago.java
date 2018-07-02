@@ -58,4 +58,8 @@ public class CelularPrePago extends Celular {
                       dataDeValidadeDoSaldo.get(GregorianCalendar.YEAR));
         return info;
     }
+
+    public boolean podeExcluir() {
+        return saldo == 0;
+    }
 }

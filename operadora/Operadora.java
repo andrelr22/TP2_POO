@@ -119,39 +119,21 @@ public class Operadora {
         celular.registrarLigacao(dataHora, duracao);
     }
 
-    public int removeCelular(String numeroDoCelular){
-        int contador=0;
-        for(Celular c : celulares){
-            if(numeroDoCelular.equals(c.getNumero())){
-                String cpf = c.getCpf();
-                celulares.remove(contador);
-                /*System.out.println("yo");
-                int contador2=0;
-                for (Cliente cl: clientes){
-                   System.out.println("for cliente");
-                    if(cpf.equals(cl.getCpfCnpj())){
-                        System.out.println("achou o cpf igual");
-                        if(cl.removeCelular(numeroDoCelular)==true){
-                            System.out.println("operacao com sucesso");
-                         return 1;
-                        }
-                        else{
-                            System.out.println("operacao fracassou");
-                           return -1;
-                        }
-                    }
-                    contador2=contador2 + 1;
-
-                }
-
-                System.out.println("nao achou o cliente com o cpf");
-                return -1;
-                */
-                return 1;
-            }
-            contador=contador+1;
+    public void removeCelular(String numeroDoCelular) throws CelularInvalidoException,
+                                                             ClienteInvalidoException {
+        Celular celular = getCelular(numeroDoCelular);
+        if (celular == null) {
+            throw new CelularInvalidoException("ERRO Nao existe celular com o numero: ", numeroDoCelular);
         }
-        return -2;
+        Cliente cliente = getCliente(celular.getCpf());
+        if (cliente == null) {
+            throw new ClienteInvalidoException("ERRO O celular pertence a um CPF/CNPJ nao cadastrado: ", celular.getCpf());
+        }
+        if (!celular.podeExcluir()) {
+            throw new CelularInvalidoException("ERRO Existem pendencias financeiras no celular: ", numeroDoCelular);
+        }
+        cliente.removeCelular(celular);
+        celulares.remove(celular);
     }
 
     public int adicionaCreditos(String numeroCelular, int valor){

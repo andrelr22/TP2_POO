@@ -156,17 +156,18 @@ public class Console {
     }
 
     private static void excluirCelular() {
-       System.out.println("Insira o numero do celular a ser excluido");
-       String numero = promptString("Numero do Celular");
-       if(operadora.removeCelular(numero)==1){
-       	System.out.println("celular removido com sucesso");
-       }else if (operadora.removeCelular(numero)==-1){
-       	System.out.println("erro interno");
-       } else if (operadora.removeCelular(numero)==-2){
-       	System.out.println("numero de celular não encontrado");
-       }
-       //TODO corrigir o erro e adicionar situações condicionais que impeçam a exclusao
-
+        System.out.println("Insira o numero do celular a ser excluido");
+        String numero = promptString("Numero do Celular");
+        try {
+            operadora.removeCelular(numero);
+        } catch (CelularInvalidoException excp) {
+            System.out.println(excp.getMessage() + excp.getNumeroDoCelular());
+            return;
+        } catch (ClienteInvalidoException excp) {
+            System.out.println(excp.getMessage() + excp.getCpfCnpj());
+            return;
+        }
+        System.out.println("Celular " + numero + " excluido com sucesso");
     }
 
     private static void adicionaCreditos(){

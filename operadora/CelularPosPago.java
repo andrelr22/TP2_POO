@@ -25,7 +25,7 @@ public class CelularPosPago extends Celular {
     public boolean isPosPago(){
     	return true;
     }
-    
+
     public List<String> obterInfo() {
         int diaDaFatura = dataDaFatura.get(GregorianCalendar.DAY_OF_MONTH);
 
@@ -45,5 +45,13 @@ public class CelularPosPago extends Celular {
         info.add("valor da conta");
         info.add("" + totalDaConta);
         return info;
+    }
+
+    public boolean podeExcluir() {
+        GregorianCalendar hoje = new GregorianCalendar();
+        GregorianCalendar faturaAtual = new GregorianCalendar();
+        faturaAtual.set(GregorianCalendar.DAY_OF_MONTH,
+                        dataDaFatura.get(GregorianCalendar.DAY_OF_MONTH));
+        return hoje.after(faturaAtual);
     }
 }
