@@ -14,6 +14,8 @@ import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Vector;
 
+import excecoes.*;
+
 public abstract class Celular {
     static private int proximoNumero = 0;
 

@@ -35,7 +35,7 @@ public class Operadora {
         Cliente novoCliente = new Cliente(nome, endereco, cpf_cnpj);
         if (getCliente(cpf_cnpj) != null) {
             throw new ClienteInvalidoException("ERRO Ja existe cliente cadastrado com o CPF/CNPJ: ",
-                                               novoCliente);
+                                               nome);
         }
         clientes.add(novoCliente);
     }
@@ -54,7 +54,7 @@ public class Operadora {
         Plano novoPlano = new Plano(nome, valorPorMinuto);
         if (getPlano(nome) != null) {
             throw new PlanoInvalidoException("ERRO Ja existe plano cadastrado com o nome: ",
-                                             novoPlano);
+                                             nome);
         }
         planos.add(novoPlano);
     }
@@ -79,12 +79,12 @@ public class Operadora {
         Cliente cliente = getCliente(cpf_cnpj);
         if (cliente == null) {
             throw new ClienteInvalidoException("ERRO Nao existe cliente cadastrado com o CPF/CNPJ: ",
-                                               new Cliente("", "", cpf_cnpj));
+                                               cpf_cnpj);
         }
         Plano plano = getPlano(nomeDoPlano);
         if (plano == null) {
             throw new PlanoInvalidoException("ERRO Nao existe plano cadastrado com o nome: ",
-                                             new Plano(nomeDoPlano, 0));
+                                             nomeDoPlano);
         }
         Celular novoCelular;
         if (prePago) {

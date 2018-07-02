@@ -36,7 +36,7 @@ public class CelularPrePago extends Celular {
     }
 
     public void registrarLigacao(GregorianCalendar dataHora, double duracao) throws CelularInvalidoException {
-        double valor = plano.cobrar(duracao);
+        double valor = cobrar(duracao);
         if (valor > saldo) {
             throw new CelularInvalidoException("ERRO Saldo insuficiente para realizar ligacao no celular: ",
                                                 getNumero());

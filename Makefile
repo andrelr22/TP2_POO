@@ -21,19 +21,15 @@ BLOCK_WARNINGS = -Werror -Xlint # Treat any compilation warning as error
 
 MAIN = Console.java
 
-OPERADORA = ./operadora/Operadora.java
+OPERADORA = ./operadora/*.java
 
 EXCECOES = ./excecoes/*.java
-
-OPERADORA_ITEMS = ./operadora/[!O]*.java # everything inside ./operadora/ except 'Operadora.java'
 
 all: $(MAIN:.java=.class)
 
 $(MAIN:.java=.class): $(OPERADORA:.java=.class)
 
 $(OPERADORA:.java=.class): $(EXCECOES:.java=.class)
-
-$(EXCECOES:.java=.class): $(OPERADORA_ITEMS:.java=.class)
 
 clean:
 	$(RM) ./excecoes/*.class
