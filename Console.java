@@ -245,7 +245,6 @@ public class Console {
         System.out.println("Insira informacoes para o registro da ligacao:");
         String numeroDoCelular = promptString("Numero do celular");
         GregorianCalendar dataLigacao = promptCalendar("Data da ligacao(dd/mm/aaaa ou default = hoje)");
-        // TODO Usar hora da ligacao
         GregorianCalendar horaLigacao = promptHora("Horario da ligacao(hh:mm ou default = agora)");
         double duracao = promptDouble("Duracao da chamada (minutos)");
         String confirmacao = promptString("Confirmar ligacao? [s/n]");
@@ -253,6 +252,13 @@ public class Console {
             System.out.println("Ligacao cancelada pelo usuario");
             return;
         }
+
+        // J.O.V.E.M. = Java Overly Verbose Experimental Method
+        if (dataLigacao == null) dataLigacao = new GregorianCalendar();
+        if (horaLigacao == null) horaLigacao = new GregorianCalendar();
+        dataLigacao.set(GregorianCalendar.HOUR_OF_DAY, horaLigacao.get(GregorianCalendar.HOUR_OF_DAY));
+        dataLigacao.set(GregorianCalendar.MINUTE, horaLigacao.get(GregorianCalendar.MINUTE));
+
         try {
             operadora.registrarLigacao(numeroDoCelular, dataLigacao, duracao);
         } catch (CelularInvalidoException excp) {
