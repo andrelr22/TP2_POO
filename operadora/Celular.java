@@ -76,4 +76,5 @@ public abstract class Celular {
     public abstract boolean isPosPago();
     public abstract List<String> obterInfo();
     public abstract boolean podeExcluir();
+    public abstract GregorianCalendar getVencimento();
 }

@@ -58,4 +58,12 @@ public class CelularPrePago extends Celular {
     public boolean podeExcluir() {
         return saldo == 0;
     }
+
+    public GregorianCalendar getVencimento(){
+    	return this.dataDeValidadeDoSaldo;
+    }
+
+    public double getSaldo(){
+    	return this.saldo;
+    }
 }

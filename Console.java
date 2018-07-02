@@ -32,6 +32,7 @@ public class Console {
                                 "extrato",
                                 "telefonar",
                                 "listar",
+                                "itens_vencidos",
                                 "sair"};
 
     private static boolean executarLinhaDeComando() {
@@ -56,6 +57,8 @@ public class Console {
             extrato();
         } else if (input.equals("listar")) {
             listar();
+        } else if (input.equals("itens_vencidos")) {
+            itensVencidos();
         } else if (input.equals("telefonar")) {
             telefonar();
         } else if (input.equals("sair")) {
@@ -209,6 +212,18 @@ public class Console {
 
 
 
+    }
+
+    private static void itensVencidos(){
+    	System.out.println("");
+    	System.out.println("Informacoes Sobre celulares com faturas/créditos vencidos: ");
+    	System.out.println("");
+    	List<String> info = new Vector<String>();
+    	info=operadora.itensVencidos();
+
+    	for (int i = 0; i < info.size(); i++) {
+	            System.out.println(info.get(i));
+	        }
     }
 
     private static void telefonar() {

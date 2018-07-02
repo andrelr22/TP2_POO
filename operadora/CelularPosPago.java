@@ -54,4 +54,8 @@ public class CelularPosPago extends Celular {
                         dataDaFatura.get(GregorianCalendar.DAY_OF_MONTH));
         return hoje.after(faturaAtual);
     }
+
+        public GregorianCalendar getVencimento(){
+    	return this.dataDaFatura;
+    }
 }

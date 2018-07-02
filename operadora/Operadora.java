@@ -213,5 +213,37 @@ public class Operadora {
         return info;
     }
 
+    public List<String> itensVencidos(){
+        GregorianCalendar now = new GregorianCalendar();
+        List<String> info = new Vector<String>();
+        for(Celular c: celulares){
+            if(now.compareTo(c.getVencimento()) ==1){
+                if(c.isPosPago()){
+                    info.add("Celular: " + c.getNumero());
+                    info.add("Tipo: Pos-Pago");
+                    Cliente cl = getCliente(c.getCpf());
+                    info.add("Cliente associado :" + cl.getNome());
+                    info.add("CPF/CNPJ :" + cl.getCpfCnpj());
+                    info.add("Endereco :" + cl.getEndereco());
+                    info.add("");
+                }else{
+                    if(((CelularPrePago) c).getSaldo()>0){ //se o saldo é 0, não será considerado que possui creditos vencidos... 
+                        info.add("Celular: " + c.getNumero());
+                        info.add("Tipo: Pre-Pago");
+                        Cliente cl = getCliente(c.getCpf());
+                        info.add("Cliente associado :" + cl.getNome());
+                        info.add("CPF/CNPJ :" + cl.getCpfCnpj());
+                        info.add("Endereco :" + cl.getEndereco());
+                        info.add("");
+
+                    }
+                }
+                
+            }
+
+        }
+        return info;
+    }
+
 
 }
