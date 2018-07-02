@@ -14,6 +14,8 @@ import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Vector;
 
+import excecoes.*;
+
 public abstract class Celular {
     static private int proximoNumero = 0;
 
@@ -41,9 +43,12 @@ public abstract class Celular {
         return copia;
     }
 
-    // TODO Erro se saldo for insuficiente no celular pre-pago
-    public void registrarLigacao(GregorianCalendar dataHora, double duracao) {
-        ligacoes.add(new Ligacao(dataHora, duracao, plano.cobrar(duracao)));
+    public double cobrar(double duracao) {
+        return plano.cobrar(duracao);
+    }
+
+    public void registrarLigacao(GregorianCalendar dataHora, double duracao) throws CelularInvalidoException {
+        ligacoes.add(new Ligacao(dataHora, duracao, cobrar(duracao)));
     }
 
     public List<Ligacao> getLigacoes(GregorianCalendar dataInicial) {

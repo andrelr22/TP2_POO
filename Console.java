@@ -52,7 +52,7 @@ public class Console {
         } else if (input.equals("add_creditos")){
         	adicionaCreditos();
         } else if (input.equals("consulta_saldo")){
-        	consultaSaldo(); 	
+        	consultaSaldo();
         } else if (input.equals("celular_info")) {
             obterInfoDoCelular();
         } else if (input.equals("cobrar_cpmf")) {
@@ -195,7 +195,7 @@ public class Console {
     	}else{
     		System.out.println("O saldo do celular de número " + numero + " é " + retorno);
     	}
-    	//TODO -> ADICIONAR CONSULTA A DATA DE EXPIRAÇÃO DOS CRÉDITOS! 
+    	//TODO -> ADICIONAR CONSULTA A DATA DE EXPIRAÇÃO DOS CRÉDITOS!
     }
 
     private static void listar(){
@@ -296,6 +296,13 @@ public class Console {
             System.out.println("Ligacao cancelada pelo usuario");
             return;
         }
+
+        // J.O.V.E.M. = Java Overly Verbose Experimental Method
+        if (dataLigacao == null) dataLigacao = new GregorianCalendar();
+        if (horaLigacao == null) horaLigacao = new GregorianCalendar();
+        dataLigacao.set(GregorianCalendar.HOUR_OF_DAY, horaLigacao.get(GregorianCalendar.HOUR_OF_DAY));
+        dataLigacao.set(GregorianCalendar.MINUTE, horaLigacao.get(GregorianCalendar.MINUTE));
+
         try {
             operadora.registrarLigacao(numeroDoCelular, dataLigacao, duracao);
         } catch (CelularInvalidoException excp) {
@@ -482,10 +489,7 @@ public class Console {
             operadora.addCelular(true, "123", "basico", hoje);
             operadora.addCelular(false, "123", "premium", hoje);
             operadora.addCelular(true, "456", "basico", hoje);
-            operadora.registrarLigacao("000000000", hoje, 5);
-            operadora.registrarLigacao("000000000", hoje, 6);
             operadora.registrarLigacao("000000001", hoje, 7);
-            operadora.registrarLigacao("000000002", hoje, 8);
         } catch (ClienteInvalidoException excp) {
             System.out.println(excp.getMessage() + excp.getCpfCnpj());
         } catch (PlanoInvalidoException excp) {

@@ -10,20 +10,19 @@
 
 package excecoes;
 
-import operadora.Plano;
-
 public class PlanoInvalidoException extends Exception {
     // Isso deve ser somente algum identificador unico para a classe.
     // A escolha do 0XAA1 e' arbitraria
     private static final long serialVersionUID = 0xAA1;
-    private Plano plano;
+    private String nomeDoPlano;
 
-    public PlanoInvalidoException(String mensagemDeErro, Plano plano) {
+    public PlanoInvalidoException(String mensagemDeErro, String nomeDoPlano) {
         super(mensagemDeErro);
-        this.plano = new Plano(plano);
+        this.nomeDoPlano = nomeDoPlano;
     }
 
     public String getNome() {
-        return plano.getNome();
+        String copia = new String(nomeDoPlano);
+        return copia;
     }
 }

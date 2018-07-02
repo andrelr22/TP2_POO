@@ -10,20 +10,19 @@
 
 package excecoes;
 
-import operadora.Cliente;
-
 public class ClienteInvalidoException extends Exception {
     // Isso deve ser somente algum identificador unico para a classe.
     // A escolha do 0XAA0 e' arbitraria
     private static final long serialVersionUID = 0xAA0;
-    private Cliente cliente;
+    private String cpfCnpjDoCliente;
 
-    public ClienteInvalidoException(String mensagemDeErro, Cliente cliente) {
+    public ClienteInvalidoException(String mensagemDeErro, String cpfCnpj) {
         super(mensagemDeErro);
-        this.cliente = new Cliente(cliente);
+        this.cpfCnpjDoCliente = cpfCnpj;
     }
 
     public String getCpfCnpj() {
-        return cliente.getCpfCnpj();
+        String copia = new String(cpfCnpjDoCliente);
+        return copia;
     }
 }
