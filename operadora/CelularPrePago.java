@@ -41,6 +41,11 @@ public class CelularPrePago extends Celular {
             throw new CelularInvalidoException("ERRO Saldo insuficiente para realizar ligacao no celular: ",
                                                 getNumero());
         }
+        if (dataHora.after(dataDeValidadeDoSaldo)) {
+            throw new CelularInvalidoException("ERRO O saldo ultrapassou a data de validade para o celular: ",
+                                                getNumero());
+        }
+        saldo -= valor;
         super.registrarLigacao(dataHora, duracao);
     }
 
