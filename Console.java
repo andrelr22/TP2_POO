@@ -158,14 +158,13 @@ public class Console {
     	System.out.println("Insira as informações necessárias para a adiçao de creditos");
     	String numero = promptString("Numero do Celular");
     	double creditos = promptDouble("Quantidade de creditos a ser adicionados");
-    	int retorno = operadora.adicionaCreditos(numero, creditos);
-    	if (retorno==1){
-    		System.out.println("creditos adicionados com sucesso");
-    	} else if(retorno==-1) {
-    		System.out.println("ERRO: O celular não é do tipo pré pago");
-    	} else if (retorno==-2){
-    		System.out.println("ERRO: Número de celular não encontrado");
-    	}
+    	try {
+            operadora.adicionaCreditos(numero, creditos);
+        } catch (CelularInvalidoException excp) {
+            System.out.println(excp.getMessage() + excp.getNumeroDoCelular());
+            return;
+        }
+        System.out.println("Creditos adicionados com sucesso");
     }
 
     private static void listar(){

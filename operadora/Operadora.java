@@ -136,18 +136,15 @@ public class Operadora {
         celulares.remove(celular);
     }
 
-    public int adicionaCreditos(String numeroCelular, double valor){
+    public void adicionaCreditos(String numeroCelular, double valor) throws CelularInvalidoException {
         Celular C = getCelular(numeroCelular);
         if (C == null) {
-            return -2;
+            throw new CelularInvalidoException("ERRO Nao existe celular com o numero: ", numeroCelular);
         }
-        if (C.isPosPago() == false) {
-            ((CelularPrePago) C).addSaldo(valor);
-            return 1;
-        } else {
-            return -1;
+        if (C.isPosPago()) {
+            throw new CelularInvalidoException("ERRO Nao podem ser adicionados creditos ao celular pos-pago: ", numeroCelular);
         }
-        //return-2;
+        ((CelularPrePago) C).addSaldo(valor);
     }
 
     public List<Ligacao> getExtrato(String numeroDoCelular,
