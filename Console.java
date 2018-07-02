@@ -439,10 +439,7 @@ public class Console {
             operadora.addCelular(true, "123", "basico", hoje);
             operadora.addCelular(false, "123", "premium", hoje);
             operadora.addCelular(true, "456", "basico", hoje);
-            operadora.registrarLigacao("000000000", hoje, 5);
-            operadora.registrarLigacao("000000000", hoje, 6);
             operadora.registrarLigacao("000000001", hoje, 7);
-            operadora.registrarLigacao("000000002", hoje, 8);
         } catch (ClienteInvalidoException excp) {
             System.out.println(excp.getMessage() + excp.getCpfCnpj());
         } catch (PlanoInvalidoException excp) {
