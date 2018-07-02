@@ -157,7 +157,7 @@ public class Console {
     private static void adicionaCreditos(){
     	System.out.println("Insira as informações necessárias para a adiçao de creditos");
     	String numero = promptString("Numero do Celular");
-    	int creditos = promptInt("Quantidade de creditos a ser adicionados");
+    	double creditos = promptDouble("Quantidade de creditos a ser adicionados");
     	int retorno = operadora.adicionaCreditos(numero, creditos);
     	if (retorno==1){
     		System.out.println("creditos adicionados com sucesso");

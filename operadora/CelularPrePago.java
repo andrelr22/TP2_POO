@@ -30,7 +30,7 @@ public class CelularPrePago extends Celular {
     	return false;
     }
 
-    public void addSaldo(int valor){
+    public void addSaldo(double valor){
         saldo=saldo+valor;
         dataDeValidadeDoSaldo.add(GregorianCalendar.DAY_OF_MONTH, 180);
     }

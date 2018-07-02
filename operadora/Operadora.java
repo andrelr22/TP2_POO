@@ -136,7 +136,7 @@ public class Operadora {
         celulares.remove(celular);
     }
 
-    public int adicionaCreditos(String numeroCelular, int valor){
+    public int adicionaCreditos(String numeroCelular, double valor){
         Celular C = getCelular(numeroCelular);
         if (C == null) {
             return -2;
