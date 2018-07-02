@@ -150,19 +150,6 @@ public class Operadora {
         //return-2;
     }
 
-    public double consultaSaldo(String numeroCelular){
-        Celular C=getCelular(numeroCelular);
-         if (C == null) {
-            return -2;
-        }
-        if (C.isPosPago() == false) {
-            double saldo = ((CelularPrePago) C).getSaldo();
-            return saldo;
-        } else { 
-            return -1;
-        }
-    }
-
     public List<Ligacao> getExtrato(String numeroDoCelular,
                                     GregorianCalendar dataInicial) throws CelularInvalidoException {
         if (dataInicial == null) {
@@ -197,18 +184,18 @@ public class Operadora {
         for (Celular c : celulares){
            info.add("Número: " + c.getNumero());
            info.add("CPF/CNPJ do cliente: " + c.getCpf());
-           info.add(" "); 
+           info.add(" ");
         }
 
         return info;
     }
-    
+
         public List<String> listarPlanos(){
             List<String> info = new Vector<String>();
             for (Plano p : planos){
                info.add("Nome do plano: " + p.getNome());
                info.add("Valor por minuto: " + p.getValor());
-               info.add(" "); 
+               info.add(" ");
             }
         return info;
     }
@@ -220,9 +207,8 @@ public class Operadora {
            info.add("CPF/CNPJ: " + c.getCpfCnpj());
            info.add("Endereco: " + c.getEndereco());
            info.add("Celulares do Cliente: ");
-           info.addAll(c.getCelulares()); 
+           info.addAll(c.getCelulares());
            info.add(" ");
-           //System.out.println("Nome: " + c.getNome() +  " ; CPF/CNPJ: " + c.getCpfCnpj() + " ; Endereço: " + c.getEndereco); 
         }
         return info;
     }

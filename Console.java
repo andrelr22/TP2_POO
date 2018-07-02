@@ -8,8 +8,6 @@
 // Andre Lage
 // Augusto Mafra
 
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -25,6 +23,7 @@ public class Console {
 
 /************************* Criar Comandos aqui dentro *************************/
     static String[] comandos = {"ajuda",
+                                "add_creditos",
                                 "cadastrar",
                                 "celular_info",
                                 "criar_celular",
@@ -32,8 +31,6 @@ public class Console {
                                 "excluir_celular",
                                 "extrato",
                                 "telefonar",
-                                "add_creditos",
-                                "consulta_saldo",
                                 "listar",
                                 "sair"};
 
@@ -51,28 +48,14 @@ public class Console {
             criarPlano();
         } else if (input.equals("add_creditos")){
         	adicionaCreditos();
-        } else if (input.equals("consulta_saldo")){
-        	consultaSaldo();
         } else if (input.equals("celular_info")) {
             obterInfoDoCelular();
-        } else if (input.equals("cobrar_cpmf")) {
-            cobrarCPMF();
-        } else if (input.equals("deposito")) {
-            deposito();
         } else if (input.equals("excluir_celular")) {
             excluirCelular();
-        } else if (input.equals("excluir_conta")) {
-            excluirConta();
         } else if (input.equals("extrato")) {
             extrato();
         } else if (input.equals("listar")) {
             listar();
-        } else if (input.equals("listar_contas")) {
-            listarContas();
-        } else if (input.equals("saldo")) {
-            //saldo();
-        } else if (input.equals("saque")) {
-            saque();
         } else if (input.equals("telefonar")) {
             telefonar();
         } else if (input.equals("sair")) {
@@ -185,29 +168,15 @@ public class Console {
     	}
     }
 
-    private static void consultaSaldo(){
-    	System.out.println("Insira as informações necessárias para a consulta");
-    	String numero = promptString("Numero do Celular");
-    	double retorno = operadora.consultaSaldo(numero);
-    	if (retorno==-1){
-    		System.out.println("ERRO: Celular cadastrado não é do tipo pre pago");
-    	}else if(retorno==-2){
-    		System.out.println("ERRO: Numero de celular não encontrado");
-    	}else{
-    		System.out.println("O saldo do celular de número " + numero + " é " + retorno);
-    	}
-    	//TODO -> ADICIONAR CONSULTA A DATA DE EXPIRAÇÃO DOS CRÉDITOS!
-    }
-
     private static void listar(){
     	String tipo = promptString("Digite o que se deseja listar: Clientes [c], Planos [p] ou Celulares[e]");
     	if (tipo.equals("c")){
-    		
+
     		System.out.println("Clientes cadastrados:");
-			
+
 			List<String> info = new Vector<String>();
-			info=operadora.listarClientes();	
-			
+			info=operadora.listarClientes();
+
 			for (int i = 0; i < info.size(); i++) {
 	            System.out.println(info.get(i));
 	        }
@@ -237,53 +206,9 @@ public class Console {
     	}else{
     		System.out.println("Comando inválido");
     	}
-    	
 
 
-    }
 
-    private static void excluirConta() {
-        /*int numConta = promptInt("Numero da conta");
-        boolean retorno = banco.removeConta(numConta);
-        if(retorno){
-            System.out.println("Conta removida com sucesso");
-        }else{
-             System.out.println("ERRO: ID de conta não corresponte a um valor cadastrado");
-        }*/
-    }
-
-    private static void deposito() {
-        System.out.println("Insira informacoes para o deposito:");
-        /*int numConta = promptInt("Numero da conta");
-        double valor = promptDouble("Valor");
-        String confirmacao = promptString("Confirmar deposito de R$" + valor + " na conta " + numConta + "? [s/n]");
-        if (confirmacao.equals("s")) {
-            boolean status = banco.deposito(numConta, valor);
-            if (status) {
-                System.out.println("Deposito concluido com sucesso");
-            } else {
-                System.out.println("ERRO: Nenhuma conta com numero " + numConta + " encontrada");
-            }
-        } else {
-            System.out.println("Deposito cancelado pelo usuario");
-        }*/
-    }
-
-    private static void saque() {
-        System.out.println("Insira informacoes para o saque:");
-        /*int numConta = promptInt("Numero da conta");
-        double valor = promptDouble("Valor");
-        String confirmacao = promptString("Confirmar saque de R$" + valor + " da conta " + numConta + "? [s/n]");
-        if (confirmacao.equals("s")) {
-            boolean status = banco.saque(numConta, valor);
-            if (status) {
-                System.out.println("Saque concluido com sucesso");
-            } else {
-                System.out.println("ERRO: Saldo da conta insuficiente para saque");
-            }
-        } else {
-            System.out.println("Saque cancelado pelo usuario");
-        }*/
     }
 
     private static void telefonar() {
@@ -311,14 +236,6 @@ public class Console {
             return;
         }
         System.out.println("Ligacao concluida com sucesso");
-    }
-
-    private static void cobrarTarifa() {
-        System.out.println("Tarifa cobrada com sucesso");
-    }
-
-    private static void cobrarCPMF() {
-        System.out.println("CPMF cobrada com sucesso");
     }
 
     private static void obterInfoDoCelular() {
@@ -354,22 +271,6 @@ public class Console {
             return;
         }
         System.out.println(ligacoes);
-    }
-
-    private static void listarClientes() {
-        System.out.println("Lista de clientes:");
-    }
-
-    private static void listarContas() {
-        System.out.println("Lista de contas:");
-    }
-
-    private static void salvar() {
-        System.out.println("Salvando dados do sistema em " + databaseFile.toAbsolutePath());
-    }
-
-    private static void restaurar() {
-        System.out.println("Restaurando dados do sistema de " + databaseFile.toAbsolutePath() + "\n");
     }
 /************************* Criar Comandos aqui dentro *************************/
 
@@ -464,7 +365,6 @@ public class Console {
 
     private static void iniciarLinhaDeComando() {
         scan = new Scanner(System.in);
-        databaseFile = Paths.get("database.txt");
 
         System.out.println("Universidade Federal de Minas Gerais");
         System.out.println("Programacao Orientada a Objetos");
@@ -513,5 +413,4 @@ public class Console {
 
     private static Operadora operadora;
     private static Scanner scan;
-    private static Path databaseFile;
 }

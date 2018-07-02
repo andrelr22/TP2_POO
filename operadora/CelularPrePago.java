@@ -44,10 +44,6 @@ public class CelularPrePago extends Celular {
         super.registrarLigacao(dataHora, duracao);
     }
 
-    public double getSaldo(){
- 		return this.saldo;
-    }
-
     public List<String> obterInfo() {
         List<String> info = new Vector<String>();
         info.add("saldo");
