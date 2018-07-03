@@ -1,0 +1,58 @@
+#
+# Este e um script de teste
+# Agora com ~~C O M E N T A R I O S~~
+#
+# Uso: java Console -script teste.poo
+#
+# AVISO A configuracao '-script' e' um recurso em versao beta e ainda sujeito a
+# falhas
+#
+# Evidentemente, esta linguagem de script e' ilegivel
+# Nao espere que tudo funcione corretamente
+#
+cadastrar
+ze
+123
+rua do ze
+s
+#
+cadastrar
+jao
+456
+rua do jao
+s
+#
+criar_plano
+basico
+1000
+s
+#
+criar_plano
+premium
+2000
+s
+#
+criar_celular
+c
+123
+basico
+s
+#
+criar_celular
+a
+123
+premium
+
+s
+#
+criar_celular
+c
+456
+basico
+s
+telefonar
+000000001
+
+
+7
+s

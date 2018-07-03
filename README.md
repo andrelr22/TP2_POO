@@ -28,4 +28,11 @@ Augusto Mafra
     ```
     $ java Console -teste
     ```
+4. O programa pode ser carregado com scripts contendo comandos suportados pelo
+   Console utilizando o argumento de linha de comando `-script`:
 
+    ```
+    $ java Console -script meuscript.poo
+    ```
+   AVISO A configuracao '-script' e' um recurso em versao beta e ainda sujeito a
+   falhas.
