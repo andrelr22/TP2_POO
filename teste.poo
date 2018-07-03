@@ -10,49 +10,78 @@
 # Evidentemente, esta linguagem de script e' ilegivel
 # Nao espere que tudo funcione corretamente
 #
+# Cadastrar Ze
 cadastrar
 ze
 123
 rua do ze
 s
-#
+# Cadastrar Jao
 cadastrar
 jao
 456
 rua do jao
 s
-#
+# Plano basico
 criar_plano
 basico
 1000
 s
-#
+# Plano Premium
 criar_plano
 premium
 2000
 s
-#
+# Celular pre-pago para Ze
 criar_celular
 c
 123
 basico
 s
-#
+# Celular pos-pago para Ze
 criar_celular
 a
 123
 premium
 
 s
-#
+# Celular pre-pago para Ze
 criar_celular
 c
 456
 basico
 s
+# Telefonar do pos-pago do Ze
 telefonar
 000000001
 
 
 7
 s
+# Adicionar creditos para o Ze
+add_creditos
+000000000
+900
+#
+celular_info
+000000001
+celular_info
+000000002
+celular_info
+000000000
+excluir_celular
+000000002
+# Extrato ate hoje
+extrato
+00000001
+
+#
+listar
+c
+listar
+p
+listar
+e
+itens_vencidos
+sair
+
