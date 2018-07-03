@@ -8,9 +8,12 @@
 // Andre Lage
 // Augusto Mafra
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Arrays;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 import java.util.Vector;
 
@@ -39,8 +42,14 @@ public class Console {
 
     private static boolean executarLinhaDeComando() {
         System.out.print("> ");
-        String input = scan.nextLine();
+        String input = new String();
+        try {
+            input = scan.nextLine();
+        } catch (NoSuchElementException excp) {
+            return false; // Fim do script
+        }
         boolean status = true;
+        if (input.startsWith("#")) return status; // Comentarios no script
         if (input.equals("ajuda")) {
             mostrarListaDeComandos();
         } else if (input.equals("cadastrar")) {
@@ -416,11 +425,36 @@ public class Console {
         }
     }
 
-    public static void main(String[] args) {
-        iniciarLinhaDeComando();
-        if (Arrays.asList(args).contains("-teste")) {
+    private static void carregarScript(File scriptFile) {
+        try {
+            scan = new Scanner(scriptFile);
+        } catch (FileNotFoundException excp) {
+            System.out.println("ERRO O arquivo '" + scriptFile.getName() + "' nao existe\n");
+        }
+    }
+
+    private static void processarArgumentos(String[] args) {
+        List<String> arglist = Arrays.asList(args);
+        if (arglist.contains("-teste")) {
             setupTeste();
         }
+        if (arglist.contains("-script")) {
+            System.out.println("AVISO A configuracao '-script' e' um recurso em versao beta e ainda sujeito a falhas\n");
+            int argindex = arglist.indexOf("-script");
+            String scriptFileName = new String();
+            try {
+                scriptFileName = arglist.get(++argindex);
+                System.out.println("-script: Carregando script '" + scriptFileName + "'\n");
+            } catch (ArrayIndexOutOfBoundsException excp) {
+                System.out.println("ERRO Faltando argumento para o switch -script");
+            }
+            carregarScript(new File(scriptFileName));
+        }
+    }
+
+    public static void main(String[] args) {
+        iniciarLinhaDeComando();
+        processarArgumentos(args);
         boolean status = true;
         while (status) {
             status = executarLinhaDeComando();
